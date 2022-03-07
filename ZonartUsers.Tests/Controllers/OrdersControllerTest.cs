@@ -3,7 +3,7 @@ using MyTested.AspNetCore.Mvc;
 using Xunit;
 using ZonartUsers.Data.Models;
 using System.Linq;
-using Zonart.Controllers;
+using ZonartUsers.Controllers;
 using ZonartUsers.Models.Orders;
 
 namespace ZonartUsers.Tests.Controllers

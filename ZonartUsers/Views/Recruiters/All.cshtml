@@ -4,17 +4,16 @@
 @inject UserManager<User> UserManager
 
 <div class="container">
+    <nav class="recruit-breadcrumb" aria-label="breadcrumb mt-5 mb-5">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a class="not-active" href="/RecruitZone/Index">Home</a></li>
+
+            <li class="breadcrumb-item active" aria-current="page">Recruiters</li>
+        </ol>
+    </nav>
     <div class="section">
         <div class="row">
             <div class="recruiters-box col-lg-12">
-
-                <nav  class="recruit-breadcrumb" aria-label="breadcrumb mt-5 mb-5">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a class="not-active" href="/RecruitZone/Index">Home</a></li>
-
-                        <li class="breadcrumb-item active" aria-current="page">Recruiters</li>
-                    </ol>
-                </nav>
 
                 <div class="text-center">
                     <h2 id="tables">Recruiters</h2>
@@ -36,10 +35,10 @@
                 <div class="text-center mt-5">
                     @if (Model.Level <= 0)
                     {
-            <h2 id="tables" class="text-info btn-light text-md-center p-2">All Recruiters</h2>}
+        <h2 id="tables" class="text-info btn-light text-md-center p-2">All Recruiters</h2>}
                     @if (Model.Level > 0)
                     {
-            <h2 id="tables" class="text-info btn-light text-md-center p-2">Recruiters with Experience Level @Model.Level</h2>}
+        <h2 id="tables" class="text-info btn-light text-md-center p-2">Recruiters with Experience Level @Model.Level</h2>}
                 </div>
 
                 <div class="component">
@@ -77,3 +76,8 @@
         </div>
     </div>
 </div>
+
+<script>$(document).ready(function () {
+        $(".active").removeClass("active");
+        $("#recruit").addClass("active");
+});</script>

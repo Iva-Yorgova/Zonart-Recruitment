@@ -7,7 +7,6 @@ using Xunit;
 using ZonartUsers.Controllers;
 using ZonartUsers.Data.Models;
 using ZonartUsers.Models.Users;
-using ZonartUsers.Services.Questions;
 using ZonartUsers.Tests.Mocks;
 
 namespace ZonartUsers.Tests.Controllers

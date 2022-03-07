@@ -4818,7 +4818,8 @@ input[type="button"].btn-block {
 }
 
 .breadcrumb-item + .breadcrumb-item {
-  padding-left: 0.5rem;
+    padding-left: 0.5rem;
+    color: #adabab;
 }
 
 .breadcrumb-item + .breadcrumb-item::before {
@@ -4837,7 +4838,7 @@ input[type="button"].btn-block {
 }
 
 .breadcrumb-item.active {
-  color: #6c757d;
+    color: #adabab;
 }
 
 .pagination {

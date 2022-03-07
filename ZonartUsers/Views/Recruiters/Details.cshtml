@@ -12,24 +12,26 @@
 </li>
                 <li>
                     <a class="" href="/Users/Register">Register</a>
-                </li> }
-                            else
-                            {
+                </li>
+ }
+            else
+            {
+<li>
+    <a class="" href="/Candidates/All">Candidates</a>
+</li>
                 <li>
-                    <a class="" href="/Candidates/All">Candidates</a>
+                    <a class="" href="/Recruiters/All">Recruiters</a>
                 </li>
                                 <li>
-                                    <a class="" href="/Recruiters/All">Recruiters</a>
+                                    <a class="" href="/Jobs/All">Jobs</a>
                                 </li>
                                                 <li>
-                                                    <a class="" href="/Jobs/All">Jobs</a>
+                                                    <a class="" href="/Interviews/All">Interviews</a>
                                                 </li>
                                                                 <li>
-                                                                    <a class="" href="/Interviews/All">Interviews</a>
+                                                                    <a class="" href="/Skills/All">Skills</a>
                                                                 </li>
-                                                                                <li>
-                                                                                    <a class="" href="/Skills/All">Skills</a>
-                                                                                </li>}
+}
 </ul>
 
 <div class="container">
@@ -37,9 +39,9 @@
         <div class="row">
             <div class="mb-5 pb-5 col-md-8 offset-md-2">
 
-                <nav  class="recruit-breadcrumb" aria-label="breadcrumb mt-5 mb-5">
+                <nav class="recruit-breadcrumb" aria-label="breadcrumb mt-5 mb-5">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a class="not-active"href="/RecruitZone/Index">Home</a></li>
+                        <li class="breadcrumb-item"><a class="not-active" href="/RecruitZone/Index">Home</a></li>
                         <li class="breadcrumb-item"><a class="not-active" href="/Recruiters/All">Recruiters</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Details</li>
                     </ol>
@@ -74,3 +76,8 @@
         </div>
     </div>
 </div>
+
+<script>$(document).ready(function () {
+        $(".active").removeClass("active");
+        $("#recruit").addClass("active");
+});</script>

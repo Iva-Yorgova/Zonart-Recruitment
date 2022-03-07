@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using ZonartUsers.Data;
 using ZonartUsers.Data.Models;
 using ZonartUsers.Models.Users;
-using ZonartUsers.Services.Questions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -19,19 +18,16 @@ namespace ZonartUsers.Controllers
         private readonly SignInManager<User> signInManager;
         private readonly ZonartUsersDbContext data;
         private readonly IMemoryCache cache;
-        private readonly IQuestionService service;
 
         public UsersController(UserManager<User> userManager, 
             SignInManager<User> signInManager, 
             ZonartUsersDbContext data, 
-            IMemoryCache cache,
-            IQuestionService service)
+            IMemoryCache cache)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.data = data;
             this.cache = cache;
-            this.service = service;
         }
 
         public IActionResult Register()

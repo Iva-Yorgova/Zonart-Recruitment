@@ -1,7 +1,6 @@
 using ZonartUsers.Data;
 using ZonartUsers.Data.Models;
 using ZonartUsers.Infrastructure;
-using ZonartUsers.Services.Questions;
 using ZonartUsers.Services.Statistics;
 using ZonartUsers.Services.Templates;
 using Microsoft.AspNetCore.Builder;
@@ -52,7 +51,6 @@ namespace ZonartUsers
 
             services.AddTransient<IStatisticsService, StatisticsService>();
             services.AddTransient<ITemplateService, TemplateService>();
-            services.AddTransient<IQuestionService, QuestionService>();
 
             services.AddResponseCaching();
             services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_CONNECTIONSTRING"]);

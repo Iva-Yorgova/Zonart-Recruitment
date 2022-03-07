@@ -38,15 +38,13 @@
 
                             @foreach (var skill in Model.CandidateSkills)
                             {
-                    <button type="button" class="list-group-item list-group-item-action" disabled>@skill.Name</button>
-                    }
+                <button type="button" class="list-group-item list-group-item-action" disabled>@skill.Name</button>}
                         </div>
 
                         @if (Model.Interviews == 0)
                         {
 
-                    <a class="btn btn-block btn-success text-white mb-2 mt-3" href="/Interviews/Add?id=@Model.Id">Add Interview</a>
-                    }
+            <a class="btn btn-block btn-success text-white mb-2 mt-3" href="/Interviews/Add?id=@Model.Id">Add Interview</a>}
 
                         <a href="/Candidates/Edit?id=@Model.Id" class="btn btn-primary mt-3">Edit</a>
 
@@ -58,3 +56,8 @@
         </div>
     </div>
 </div>
+
+<script>$(document).ready(function () {
+        $(".active").removeClass("active");
+        $("#recruit").addClass("active");
+});</script>

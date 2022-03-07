@@ -24,7 +24,6 @@ namespace ZonartUsers.Infrastructure
             data.Database.Migrate();
 
             SeedTemplates(data);
-            SeedQuestions(data);
             SeedAdministrator(serviceProvider);
 
             return app;
@@ -50,28 +49,6 @@ namespace ZonartUsers.Infrastructure
 
             data.SaveChanges();
         }
-
-        private static void SeedQuestions(ZonartUsersDbContext data)
-        {
-            if (data.Questions.Any())
-            {
-                return;
-            }
-
-            data.Questions.AddRange(new[]
-            {
-            new Question { Text = Questions.FirstQuestionText, Answer = Questions.FirstQuestionAnswer },
-            new Question { Text = Questions.SecondQuestionText, Answer = Questions.SecondQuestionAnswer },
-            new Question { Text = Questions.ThirdQuestionText, Answer = Questions.ThirdQuestionAnswer },
-            new Question { Text = Questions.FourthQuestionText, Answer = Questions.FourthQuestionAnswer },
-            new Question { Text = Questions.FifthrstQuestionText, Answer = Questions.FifthrstQuestionAnswer },
-            new Question { Text = Questions.SixthQuestionText, Answer = Questions.SixthQuestionAnswer },
-            new Question { Text = Questions.SeventhQuestionText, Answer = Questions.SeventhQuestionAnswer },
-            });
-
-            data.SaveChanges();
-        }
-
         
 
         private static void SeedAdministrator(IServiceProvider services)

@@ -17,45 +17,8 @@ namespace ZonartUsers.Tests.Controllers
 {
     public class TemplatesControllerTest
     {
-        [Fact]
-        public void AllShouldReturnViewWithCorrectModel()
-        {
-            MyController<TemplatesController>
-                .Instance()
-                .Calling(c => c.All())
-                .ShouldReturn()
-                .View();
-        }
 
 
-        [Fact]
-        public void AllShouldReturnViewWithCorrectModel2()
-        {
-            // Arrange
-            using var data = DatabaseMock.Instance;
-            using var cache = MemoryCacheMock.GetMemoryCache(new List<TemplateListingViewModel>());
-            var service = new TemplateService(data);
-
-            data.Templates.Add(new Template { Name = "test", Price = 100, Description = "some" });
-            data.Templates.Add(new Template { Name = "test", Price = 50, Description = "some" });
-            data.SaveChanges();
-        
-            var controller = new TemplatesController(data, cache, service);
-        
-            // Act
-            var result = controller.All();
-        
-            // Assert
-            Assert.NotNull(result);
-            var viewResult = Assert.IsType<ViewResult>(result);
-        
-            var model = viewResult.Model;
-        
-            var viewModel = Assert.IsType<List<TemplateListingViewModel>>(model);
-        
-            Assert.Equal(2, data.Templates.Count());
-        
-        }
 
 
         [Theory]
@@ -70,7 +33,7 @@ namespace ZonartUsers.Tests.Controllers
             data.Templates.Add(new Template { Name = "test", Price = 100 });
             data.SaveChanges();
 
-            var controller = new TemplatesController(data, cache, service);
+            var controller = new TemplatesController(data, service);
 
             // Act
             var result = controller.Details(id);
@@ -100,7 +63,7 @@ namespace ZonartUsers.Tests.Controllers
             data.Templates.Add(new Template { Name = "test", Price = 100 });
             data.SaveChanges();
 
-            var controller = new TemplatesController(data, cache, service);
+            var controller = new TemplatesController(data, service);
 
             // Act
             var result = controller.Edit(id);
