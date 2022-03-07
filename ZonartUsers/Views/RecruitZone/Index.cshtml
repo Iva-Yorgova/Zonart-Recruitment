@@ -1,0 +1,56 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+<div class="pt-5 page-hero bg-primary text-white" id="banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1 text-center mt-5">
+                <div class="recruit-title title mt-5">
+                    <!--<img class="recruit-img mt-5 pt-0 mb-2" src="/Images/recruitment.png" alt="recruitment" />-->
+                    <h1 class="mb-3 display-2 text-white">RecruitZone</h1>
+                    <h4 class="mb-2 text-white">Explore our new system for helping HR companies with managing a number of available jobs, the recruiters and candidates with their skills.</h4>
+                </div>
+                <ul class="recriut-nav">
+                    @if (!SignInManager.IsSignedIn(User))
+                    {
+                <li>
+                    <a class="btn btn-lg text-white" href="/Users/Login">Login</a>
+                </li>
+                                <li>
+                                    <a class="btn btn-lg text-white" href="/Users/Register">Register</a>
+                                </li>}
+                    else
+                    {
+                <li>
+                    <a class="btn btn-lg text-white" href="/Candidates/All">Candidates</a>
+                </li>
+
+                                <li>
+                                    <a class="btn btn-lg text-white" href="/Recruiters/All">Recruiters</a>
+                                </li>
+
+                                                <li>
+                                                    <a class="btn btn-lg text-white" href="/Jobs/All">Jobs</a>
+                                                </li>
+                                                                                                                <li>
+                                                                    <a class="btn btn-lg text-white" href="/Interviews/All">Interviews</a>
+                                                                </li>
+
+                                                                                <li>
+                                                                                    <a class="btn btn-lg text-white" href="/Skills/All">Skills</a>
+                                                                                </li>}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<img class="w-100" src="/Images/recruiting.jpg" alt="recruitment" />
+
+<script>
+    $(document).ready(function () {
+        $(".active").removeClass("active");
+        $("#recruit").addClass("active");
+    });</script>

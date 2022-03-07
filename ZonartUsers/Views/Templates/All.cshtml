@@ -1,0 +1,210 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@{
+    ViewData["Title"] = "Templates";
+}
+
+@{
+    var userIsAdmin = User.IsInRole(WebConstants.AdminRoleName);
+}
+
+@model AllTemplatesModel
+
+@{
+    var previousPage = Model.CurrentPage - 1;
+    if (previousPage < 1)
+    {
+        previousPage = 1;
+    }
+
+    var maxPage = Math.Ceiling((double)Model.TotalTemplates / AllTemplatesModel.TemplatesPerPage);
+}
+
+
+<div class="row mt-0 ml-5 mr-5" style="">
+    <div class="col-12">
+        <h2 style="font-size:34px; text-align:center; padding-top:100px; letter-spacing:1px">All Templates</h2>
+
+        @if (Model.Templates.Count() == 0)
+        {
+            <h1 style="font-size:21px; text-align:center; padding-top:10px; padding-bottom:40px">We're sorry! We were not able to find any match. Try another search!</h1>
+        }
+
+    </div>
+
+
+    @if (userIsAdmin)
+    {
+        <div class="container">
+            <div class="row-custom">
+                <div class="offset-sm-1 col-sm-10 offset-lg-4 col-lg-4 offset-xl-4 col-xl-4 offset-md-4 col-md-4" style="margin-bottom:50px">
+                    <div>
+                        <a asp-area="" asp-controller="Templates" asp-action="Add" asp-route-id="" class="details-button mt-lg-30 mt-30 btn btn-block spacing-lg text-white pt-1 pb-1" style="background-color:dimgray; border:2px solid dimgray">Add New Template</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="col-12 pl-4 pr-4">
+        <form method="get">
+            <div class="row">
+                <div class="col-md-4">
+                    <label asp-for="SearchTerm"></label>
+                    <input asp-for="SearchTerm" class="form-control" placeholder="...">
+                </div>
+
+                <div class="col-md-4">
+                    <label asp-for="Category"></label>
+                    <select asp-for="Category" class="form-control">
+                        <option value="">All</option>
+                        @foreach (var category in Model.Categories)
+                        {
+                            <option value="@category">@category</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-4">
+                    <label asp-for="Sorting"></label>
+                    <select asp-for="Sorting" class="form-control">
+                        <option value="0" selected>Date Created</option>
+                        <option value="1">Price</option>
+                        <option value="2">Category</option>
+                    </select>
+                </div>
+
+                <div class="col-md-12 mt-3 text-center">
+                    <input type="submit" class="pt-2 pb-2 btn" value="search">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (Model.Templates.Count() > 0)
+{
+    <div class="row ml-5 mr-5">
+        <div class="col-md-6 w-50">
+            <a class="btn @(Model.CurrentPage == 1 ? "disabled" : string.Empty)"
+               asp-controller="Templates"
+               asp-action="All"
+               asp-route-currentPage="@(Model.CurrentPage - 1)"
+               asp-route-category="@Model.Category"
+               asp-route-searchTerm="@Model.SearchTerm"
+               asp-route-sorting="@((int)Model.Sorting)">
+            <span class="small">&#10094;&#10094 </span> Previous</a>
+        </div>
+        <div class="col-md-6 text-right w-50">
+            <a class="btn @(Model.CurrentPage == maxPage ? "disabled" : string.Empty)" asp-controller="Templates"
+               asp-action="All"
+               asp-route-currentPage="@(Model.CurrentPage + 1)"
+               asp-route-category="@Model.Category"
+               asp-route-searchTerm="@Model.SearchTerm"
+               asp-route-sorting="@((int)Model.Sorting)">Next 
+            <span class="small">&#10095;&#10095; </span></a>
+        </div>
+    </div>
+}
+
+<div class="row mb-2 pb-2 ml-5 mr-5">
+
+    @foreach (var template in Model.Templates)
+    {
+
+        <a class="template-card" asp-controller="Templates" asp-action="Details" asp-route-id="@template.Id">
+            <div class="col-md-4">
+                <div class="card mb-3 mt-2" style="border-radius: 0">
+                    <img class="card-img-top" style="border-radius: 0" src="@template.ImageUrl" alt="">
+                    <div class="card-body text-center pl-0 pr-0 pt-5 pb-0">
+                        <h2 class="card-title text-center mb-2" style="font-family: Jost; letter-spacing: 2px; font-weight: 700">@template.Name</h2>
+                        <h6 class="card-title text-center mb-4" style="font-weight: 100">@template.Price.00 USD</h6>
+                        <a asp-controller="Templates" asp-action="Details" asp-route-id="@template.Id" class="details-button mt-lg-30 mt-30 col-lg-14 btn btn-block spacing-lg text-white pt-1 pb-1" style="background-color:black; border: none">View</a>
+
+                        @if (userIsAdmin)
+                        {
+                            <div class="row" style="margin-right:0; margin-left:0">
+                                <div class="col pb-0" style="padding-right:0; padding-left:0">
+                                    <a asp-area="" asp-controller="Templates" asp-action="Edit" asp-route-id="@template.Id" class="details-button mt-lg-30 mt-30 btn btn-block spacing-lg text-white pt-1 pb-0" style="background-color:dimgray; border:none; width:100%">Edit</a>
+                                </div>
+
+                                <div class="col pb-0" style="padding-right:0; padding-left:0">
+                                    <a asp-controller="Templates" asp-action="Delete" asp-route-id="@template.Id" class="details-button mt-lg-30 mt-30 btn btn-block spacing-lg text-white pt-1 pb-0" style="background-color:orangered; border:none; width:100%">Delete</a>
+
+                                </div>
+
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </a>
+    }
+</div>
+
+@if (Model.Templates.Count() > 0)
+{
+<div class="row ml-5 mr-5 mb-5">
+    <div class="col-md-6 w-50">
+        <a class="btn @(Model.CurrentPage == 1 ? "disabled" : string.Empty)"
+           asp-controller="Templates"
+           asp-action="All"
+           asp-route-currentPage="@(Model.CurrentPage - 1)"
+           asp-route-category="@Model.Category"
+           asp-route-searchTerm="@Model.SearchTerm"
+           asp-route-sorting="@((int)Model.Sorting)">
+        <span class="small">&#10094;&#10094 </span> Previous</a>
+    </div>
+    <div class="col-md-6 text-right w-50">
+        <a class="btn @(Model.CurrentPage == maxPage ? "disabled" : string.Empty)" 
+           asp-controller="Templates"
+           asp-action="All"
+           asp-route-currentPage="@(Model.CurrentPage + 1)"
+           asp-route-category="@Model.Category"
+           asp-route-searchTerm="@Model.SearchTerm"
+           asp-route-sorting="@((int)Model.Sorting)">Next 
+        <span class="small">&#10095;&#10095; </span></a>
+    </div>
+
+    <table class="table table-hover table-bordered bg-light ml-4 mr-4 shadow-sm">
+        <thead class="bg-secondary text-white">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DbTemplates)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.Category</td>
+                    <td>@item.Description</td>
+                    <td>@item.Price.00 USD</td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+}
+
+
+
+
+<script>
+    $(document).ready(function () {
+        $(".active").removeClass("active");
+        $("#templates").addClass("active");
+    });
+</script>
+
+

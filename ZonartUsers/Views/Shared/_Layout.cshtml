@@ -1,0 +1,305 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zonart @ViewData["Title"]</title>
+    <link rel="stylesheet" href="../css/site.css" />
+    <link rel="stylesheet" href="../lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="../css/site.css" />
+
+    <link rel="shortcut icon" href="/Images/favicon.ico" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/font-awesome.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/css/lightbox.min.css">
+
+    <link rel="stylesheet" href="~/css/js_composer.min.css">
+    <link rel="stylesheet" href="~/css/animate.min.css" />
+    <link rel="stylesheet" href="~/css/front.bundle.css" />
+    <link rel="stylesheet" href="~/css/skeleton.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
+
+
+    <link rel="stylesheet" href="~/gallery/css/reset.css"> <!-- CSS reset -->
+    <link rel="stylesheet" href="~/gallery/css/style.css"> <!-- Resource style -->
+    <script src="~/gallery/js/modernizr.js"></script> <!-- Modernizr -->
+    <script src="~/gallery/js/jquery-3.6.0.js"></script>
+    <script src="~/gallery/js/jquery-ui.js"></script>
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="../css/example.css">
+    <link rel="stylesheet" href="../css/stroll.css">
+
+    <link href="~/lib/bootstrap/dist/css/bootstrap-chosen.css" rel="stylesheet" />
+
+    <script src="https://kit.fontawesome.com/68a5303305.js" crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="~/js/mixitup.min.js"></script>
+
+</head>
+
+
+<body>
+
+    <div id="myNav-new" class="overlay-new">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div class="overlay-content">
+            <a href="/Projects/All">All Cases</a>
+            <a href="/Projects/Logos">Logos</a>
+            <a href="/Projects/Books">Books</a>
+            <a href="/Projects/Brochures">Brochures</a>
+            <a href="/Projects/Stationary">Stationary</a>
+            <a href="/Projects/Variety">Variety</a>
+            <a href="/Projects/Kids">Kids</a>
+            <a href="/Projects/Posters">Posters</a>
+            <a href="/Projects/Web">Web</a>
+        </div>
+    </div>
+
+
+    <header>
+        <div class="navigation position-fixed w-100">
+
+            <div class="topnav" id="myTopnav">
+
+                <a asp-area="" asp-controller="Home" asp-action="Index" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Home" id="home" style="padding-top:11px; padding-bottom: 13px">
+                    <img class="z-logo-icon" src="" alt="Zonart logo" style="" />
+                </a>
+
+                <a asp-area="" asp-controller="About" asp-action="OurStory" id="about">About</a>
+
+                <a asp-area="" asp-controller="Services" asp-action="All" id="services">Services</a>
+
+                <a asp-area="" asp-controller="Templates" asp-action="All" id="templates">Templates</a>
+
+                <div class="dropdown">
+                    <a class="dropbtn" asp-controller="Projects" asp-action="All" id="projects">
+                        Projects <i class="fa fa-caret-down fa-xs"></i>
+                    </a>
+                    <div class="dropdown-content">
+                        <a asp-controller="Projects" asp-action="Brochures">Brochures</a>
+                        <a asp-controller="Projects" asp-action="Logos">Logos</a>
+                        <a asp-controller="Projects" asp-action="Books">Books</a>
+                        <a asp-controller="Projects" asp-action="Posters">Posters</a>
+                        <a asp-controller="Projects" asp-action="Kids">Kids</a>
+                        <a asp-controller="Projects" asp-action="Web">Web</a>
+                        <a asp-controller="Projects" asp-action="Stationary">Stationary</a>
+                        <a asp-controller="Projects" asp-action="Variety">Variety</a>
+                    </div>
+                </div>
+
+                <a asp-area="" asp-controller="Gallery" asp-action="All" id="gallery">Gallery</a>
+
+                <a asp-area="" asp-controller="RecruitZone" asp-action="Index" id="recruit">RecruitZone</a>
+
+                <a asp-area="" asp-controller="Contact" asp-action="Add" id="contact">Contact</a>
+
+                <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    var userIsAdmin = User.IsInRole(WebConstants.AdminRoleName);
+
+                    if (userIsAdmin)
+                    {
+            <a class="admin nav-right" style="float:right; font-weight: 100; width: 57px; height: 50px" asp-area="" asp-controller="Users" asp-action="WelcomeAdmin" id="admin" title="Admin" data-toggle="tooltip" data-placement="bottom" data-container="body">
+                <img class="admin" alt="Admin" />
+            </a> }
+
+            <a class="user-logout nav-right" style="float:right; font-weight: 100; width: 57px; height: 50px" asp-area="" asp-controller="Users" asp-action="Logout" id="logout" title="Logout" data-toggle="tooltip" data-placement="bottom" data-container="body">
+                <img class="logout-user" alt="Logout" />
+            </a> }
+
+                        else
+                        {
+            <a class="user-login nav-right float-right" style="" asp-area="" asp-controller="Users" asp-action="Login" id="login" title="Login" data-toggle="tooltip" data-placement="bottom" data-container="body">
+                <img class="login-user" alt="Login" />
+            </a>
+
+                            <a class="user-register nav-right float-right" asp-area="" asp-controller="Users" asp-action="Register" id="register" title="Register" data-toggle="tooltip" data-placement="bottom" data-container="body">
+                                <img class="register-user" alt="Register" />
+                            </a>}
+
+                <a class="questions nav-right float-right" asp-area="" asp-controller="Questions" asp-action="All" id="questions" title="Questions" data-toggle="tooltip" data-placement="bottom" data-container="body">
+                    <img class="questions-image" alt="questions" />
+                </a>
+
+                <a class="nav-right explore float-right" onclick="openNav()" title="Explore" data-toggle="tooltip" data-placement="bottom" data-container="body"><img class="compass" alt="explore" /></a>
+
+                <!--<partial name="_LoginPartial" />-->
+            </div>
+        </div>
+
+    </header>
+
+
+    <button id="myBtn" title="Go to top" style="color:lightgray" data-toggle="tooltip" data-placement="bottom" data-container="body">
+        <i class="material-icons">arrow_upward</i>
+    </button>
+
+
+    <div class="container-fluid-new" style="padding-left: 0px; padding-right: 0px">
+        @if (TempData.ContainsKey(WebConstants.GlobalMessageKey))
+        {
+        <div class="row">
+            <div class="offset-sm-1 col-sm-10 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6 offset-md-3 col-md-6" style="padding-left:30px">
+                <div class="text-center text-dark mb-5 pb-5">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top:100px">
+                        @TempData[WebConstants.GlobalMessageKey]
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="top:5px">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+
+
+        <main role="main">
+            @RenderBody()
+        </main>
+
+    </div>
+
+
+    <footer>
+        <div class="wpb_wrapper">
+            <div class="vc_row wpb_row vc_inner vc_row-fluid left_t case-studie-row vc_row-o-equal-height vc_row-o-content-middle vc_row-flex">
+
+                <div class="wpb_column vc_column_container vc_col-sm-6" style="height:500px; background-color: #f5f5f0">
+                    <div class="vc_column-inner">
+                        <div class="wpb_wrapper">
+                            <div class="wpb_text_column wpb_content_element wpb_animate_when_almost_visible wpb_fadeInRight fadeInRight wpb_start_animation animated">
+                                <div class="wpb_wrapper">
+
+                                    <p class="pt-4 pb-0 mb-0" style="font-size:50px;font-family:Playfair Display; letter-spacing:-2px; text-align: center">Have a story <br />to tell?</p>
+                                    <p style="text-align:center" class="pt-2 pr-3 pl-3 mr-5 ml-5 mt-4 mb-4 pb-4">Work with us! <br />We'll help you build out the spine of the narrative and execute a unique brand experience - digital, physical, or otherwise. </p>
+                                    <hr class="solid mt-4 mb-0 pt-0 pb-0" style="border-top:7px solid orangered; width:10%">
+                                </div>
+                            </div>
+
+                            <div class="pb-5 mb-5 vc_btn3-container wpb_animate_when_almost_visible wpb_fadeInRight fadeInRight vc_btn3-center wpb_start_animation animated">
+
+                                <a class="btn btn-spec pt-2 pb-2 pl-4 pr-4" style="font-weight: 400" asp-controller="Contact" asp-action="Add">GET STARTED</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wpb_column vc_column_container vc_col-sm-6 vc_col-has-fill" style="height:500px">
+                    <div class="vc_column-inner vc_custom_1582317256604" style="background-color: orangered; background-position: center !important; background-repeat: no-repeat !important; background-size: cover !important;">
+
+                        <div class="wpb_wrapper">
+                            <div style="text-align: center">
+                                <img class="footer-logo" alt="LOGO" />
+                            </div>
+
+                            <p class="" style="font-size:32px; font-family:Jost; text-align: center; color: white; font-weight: 700; letter-spacing: 4px; margin-top: 0; padding-top: 20px">ZONART</p>
+                            <p style="text-align: center; color: white; font-size: 12px" class="pr-5 pl-5 mr-5 ml-5">
+                                &copy; @DateTime.UtcNow.Year Zonart Studio
+                                <br />StreetName 111
+                                <br />111 11 City, Country
+                                <br />11 111 111 111
+                                <br />info@zonart.com
+                            </p>
+                            <hr class="solid mt-4 mb-0 pt-0 pb-0" style="border-top:4px solid orangered; width:25%">
+
+                            <div class="" style="text-align:center">
+                                <a href="#"><i class="fa fa-instagram fa-sm" style="color: white; margin-right: 20px"></i></a>
+                                <a href="#"><i class="fa fa-twitter fa-sm" style="color: white; margin-right: 20px"></i></a>
+                                <a href="#"><i class="fa fa-behance fa-sm" style="color: white"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="~/lib/jquery/dist/jquery.js/jquery.visible.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js/jquery.visible.js/jquery.visible.min.js"></script>
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/chosen.jquery.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+        function openPage(pageName, elmnt, color) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].style.backgroundColor = "";
+            }
+            document.getElementById(pageName).style.display = "block";
+            elmnt.style.backgroundColor = color;
+        }
+
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+    </script>
+
+    <script>
+        function openNav() {
+            document.getElementById("myNav-new").style.width = "100%";
+        }
+
+        function closeNav() {
+            document.getElementById("myNav-new").style.width = "0%";
+        }
+    </script>
+
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myTopnav");
+            if (x.className === "topnav") {
+                x.className += " responsive";
+            } else {
+                x.className = "topnav";
+            }
+        }
+    </script>
+
+</body>
+</html>

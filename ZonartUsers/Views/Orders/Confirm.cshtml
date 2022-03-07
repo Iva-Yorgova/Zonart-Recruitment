@@ -1,0 +1,49 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@model OrderTemplateModel
+
+@{
+    ViewData["Title"] = "Confirm";
+}
+
+
+<div class="row mb-5 ml-5 mr-5" style="padding-top:70px; margin-bottom:100px">
+    <div class="col mt-5 mb-5 ml-5 mr-5" style="text-align:center">
+        <h2 style="font-size:40px">Thank you <br />for your order!</h2>
+        <p style="font-size:20px">You will recieve an email with instructions for downloading the template.</p>
+
+
+        <div class="row mt-5 mb-5 pb-5" style="text-align:center; padding-top:70px">
+
+            <div class="col"></div>
+
+            <div class="col pl-2 pr-2" style="font-weight: 500">
+                <form action="/Templates/All">
+                    <div class="">
+                        <input type="submit" value="Templates Page">
+                    </div>
+                </form>
+            </div>
+
+            <div class="col pl-2 pr-2" style="font-weight: 500">
+                <form action="/Home/Index">
+                    <div class="">
+                        <input type="submit" value="Home Page">
+                    </div>
+                </form>
+            </div>
+
+            <div class="col"></div>
+
+        </div>
+
+    </div>
+ 
+</div>
+
+
+
+
+

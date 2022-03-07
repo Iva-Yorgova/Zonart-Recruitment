@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZonartUsers", "ZonartUsers\ZonartUsers.csproj", "{9A4D4354-C961-407D-A977-2C08F6A22C64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZonartUsers.Tests", "ZonartUsers.Tests\ZonartUsers.Tests.csproj", "{CD544AC3-0B2B-4764-8C6E-401F2886881D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9A4D4354-C961-407D-A977-2C08F6A22C64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A4D4354-C961-407D-A977-2C08F6A22C64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A4D4354-C961-407D-A977-2C08F6A22C64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A4D4354-C961-407D-A977-2C08F6A22C64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD544AC3-0B2B-4764-8C6E-401F2886881D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD544AC3-0B2B-4764-8C6E-401F2886881D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD544AC3-0B2B-4764-8C6E-401F2886881D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD544AC3-0B2B-4764-8C6E-401F2886881D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F3407C04-5FED-43B8-9DD6-97A426F2F8D5}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewData["Title"] = "Projects";
+}
+
+
+<div class="hover-direction-gallery mt-0">
+
+    <ul class="grid" style="background:transparent">
+        <li>
+            <a class="grid-item" asp-area="" asp-controller="Projects" asp-action="Brochures">
+                <img src="../Images/projects/brochures/brochure-design.jpg" alt="" style="display: block; height:100%; max-width:100%; width:100%; object-fit:cover;">
+                <span class="description"><img src="../Images/png/brochure3-white.png" style="color:white; width:30px; padding-bottom:12px" alt="Alternate Text" /><br />Brochures</span>
+            </a>
+        </li>
+        <li>
+            <a  class="grid-item" asp-area="" asp-controller="Projects" asp-action="Logos">
+                <img src="../Images/projects/logos/logo-design.jpg" alt="" style="display: block; height:100%; max-width:100%; width:100%; object-fit:cover;">
+                <span class="description"><img src="../Images/png/pen-tool-white.png" style="color:white; width:30px; padding-bottom:12px" alt="Alternate Text" /><br />Logos</span>
+            </a>
+        </li>
+        <li>
+            <a  class="grid-item" asp-area="" asp-controller="Projects" asp-action="Books">
+                <img src="../Images/projects/books/book-design.jpg" alt="" style="display: block;height: 100%;max-width: 100%;width: 100%;object-fit: cover;">
+                <span class="description"><img src="../Images/png/book.png" style="color:white; width:30px; padding-bottom:12px" alt="Alternate Text" /><br />Books</span>
+            </a>
+        </li>
+        <li>
+            <a  class="grid-item" asp-area="" asp-controller="Projects" asp-action="Posters">
+                <img src="../Images/projects/posters/poster-design.jpg" alt="" style="display: block;height: 100%;max-width: 100%;width: 100%;object-fit: cover;">
+                <span class="description"><img src="../Images/png/poster-white.png" style="color:white; width:30px; padding-bottom:12px" alt="Alternate Text" /><br />Posters</span>
+            </a>
+        </li>
+        <li>
+            <a  class="grid-item" asp-area="" asp-controller="Projects" asp-action="Kids">
+                <img src="../Images/projects/kids/kids-design.jpg" alt="" style="display: block;height: 100%;max-width: 100%;width: 100%;object-fit: cover;">
+                <span class="description"><img src="../Images/png/boy.png" style="color:white; width:30px; padding-bottom:12px" alt="Alternate Text" /><br />Kids</span>
+            </a>
+        </li>
+        <li>
+            <a  class="grid-item" asp-area="" asp-controller="Projects" asp-action="Web">
+                <img src="../Images/projects/web/web-design.jpg" alt="" style="display: block;height: 100%;max-width: 100%;width: 100%;object-fit: cover;">
+                <span class="description"><img src="../Images/png/web.png" style="color:white; width:30px; padding-bottom:12px" alt="Alternate Text" /><br />Web</span>
+            </a>
+        </li>
+
+        <li>
+            <a class="grid-item" -area="" asp-controller="Projects" asp-action="Stationary">
+                <img src="../Images/projects/stationary/stationary-design.jpg" alt="" style="display: block;height: 100%;max-width: 100%;width: 100%;object-fit: cover;">
+                <span class="description"><img src="../Images/png/stationary.png" style="color:white; width:30px; padding-bottom:12px" alt="Alternate Text" /><br />Stationary</span>
+            </a>
+        </li>
+
+        <li>
+            <a class="grid-item" asp-area="" asp-controller="Projects" asp-action="Variety">
+                <img src="../Images/projects/variety/variety-design.jpg" alt="" style="display: block;height: 100%;max-width: 100%;width: 100%;object-fit: cover;">
+                <span class="description"><img src="../Images/png/variety.png" style="color:white; width:30px; padding-bottom:12px" alt="Alternate Text" /><br />Variety</span>
+            </a>
+        </li>
+
+    </ul>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $(".active").removeClass("active");
+        $("#projects").addClass("active");
+    });
+</script>
+
+
+@section Scripts{ 
+    <script>
+        $.get('/Projects/All', (data) => {
+            console.log(data);
+        })
+    </script>
+}

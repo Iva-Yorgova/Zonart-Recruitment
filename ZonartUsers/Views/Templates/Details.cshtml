@@ -1,0 +1,25 @@
+﻿@model TemplateLayoutModel
+
+@{
+    ViewData["Title"] = "Template Details";
+}
+
+
+<h1 style="padding-top:100px; padding-bottom:10px; text-align:center; font-family:Jost; font-variant-caps:all-petite-caps; font-size:40px">@Model.Name</h1>
+<h2 style="margin-top: 10px; margin-bottom: 10px; text-align: center; font-style: italic; color: black; font-size:20px">@Model.Description</h2>
+<h4 style="margin-top: 10px; margin-bottom: 10px; text-align: center; font-style: italic; color: gray">Category: @Model.Category</h4>
+<h5 style="margin-top: 10px; margin-bottom: 10px; text-align: center; font-style: italic; color: gray">Price: @Model.Price.00 USD</h5>
+<img src="../../Images/gallery/(@Model.Id).jpg" style="max-width: 100%; height: auto;" />
+
+
+<div class="bg-text">
+    <a href="/Orders/Create?templateId=@Model.Id">Order</a>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $(".active").removeClass("active");
+        $("#templates").addClass("active");
+    });
+</script>

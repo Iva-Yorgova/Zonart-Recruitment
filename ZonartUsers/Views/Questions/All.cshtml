@@ -1,0 +1,279 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+
+@{
+    ViewData["Title"] = "Questions";
+}
+
+@{
+    var userIsAdmin = User.IsInRole(WebConstants.AdminRoleName);
+}
+
+@model List<QuestionsListingViewModel>
+
+
+<div class="row mb-5 pt-5" style="margin-bottom: 100px; padding-left:30px; padding-right:30px">
+
+    <div class="offset-sm-0 col-sm-12 offset-lg-1 col-lg-10 offset-xl-1 col-xl-10 offset-md-1 col-md-10 vc_col-xs-12">
+        <h2 style="font-size: 34px; text-align: center; padding-top: 100px; padding-bottom: 40px">Frequently Asked Questions</h2>
+    </div>
+
+    @if (userIsAdmin)
+    {
+        <div class="container">
+            <div class="row-custom" style="padding-right: 20px; padding-left: 20px;">
+                <div class="offset-sm-1 col-sm-10 offset-lg-4 col-lg-4 offset-xl-4 col-xl-4 offset-md-4 col-md-4" style="padding-right: 20px; padding-left: 20px; margin-bottom: 50px">
+                    <div>
+                        <a asp-area="" asp-controller="Questions" asp-action="Add" asp-route-id="" class="details-button mt-lg-30 mt-30 btn btn-block spacing-lg text-white pt-1 pb-1" style="background-color:dimgray; border:2px solid dimgray">Add New Question</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+
+
+    @foreach (var question in Model)
+    {
+        <div class="offset-sm-0 col-sm-12 offset-lg-2 col-lg-8 offset-xl-2 col-xl-8 offset-md-1 col-md-10 vc_col-xs-12">
+            <button class="accordion mb-2">@question.Text</button>
+            <div class="panel mt-4 mb-5">
+                <p>@question.Answer</p>
+
+                @if (userIsAdmin)
+                {
+                    <div class="row" style="margin-right:0; margin-left:0">
+                        <div class="col" style="padding-right:0; padding-left:0">
+                            <a asp-area="" asp-controller="Questions" asp-action="Edit" asp-route-id="@question.Id" class="details-button mt-lg-30 mt-30 btn btn-block spacing-lg text-white pt-1 pb-1" style="background-color:dimgray; border:none; width:80%">Edit</a>
+                        </div>
+
+                        <div class="col" style="padding-right:0; padding-left:0">
+                            <a asp-controller="Questions" asp-action="Delete" asp-route-id="@question.Id" class="details-button mt-lg-30 mt-30 btn btn-block spacing-lg text-white pt-1 pb-1" style="background-color:orangered; border:none; width:100%">Delete</a>
+                        </div>
+
+                    </div>
+                }
+            </div>
+
+        </div>
+    }
+
+    <!--<div class="col-12">
+                <div class="text-js">
+                    <div class="cool-js">Design is&nbsp;</div>
+                    <span class="word wisteria">beautiful.</span>
+                    <span class="word midnight">powerful.</span>
+                    <span class="word belize">divine.</span>
+                    <span class="word pomegranate">fancy.</span>
+                    <span class="word green">elegant.</span>
+                    <span class="word belize">rich.</span>
+                    <span class="word wisteria">smart.</span>
+                    <span class="word midnight">free.</span>
+                    <span class="word pomegranate">love.</span>
+                    <span class="word green">strength.</span>
+                    <span class="word belize">courage.</span>
+                    <span class="word wisteria">style.</span>
+                    <span class="word pomegranate">cool.</span>
+                    <span class="word green">hip.</span>
+                    <span class="word midnight">wealth.</span>
+                </div>
+    </div>
+
+
+    <!--<div id="ubercontainer">
+        <div id="container">
+            <span class="the-first"></span>
+            <span class="static first">better websites </span><br />
+            <span class="static second">made for</span>
+            <span class="the-second"></span>
+        </div>
+    </div>-->
+
+<div id="mySidenav" class="sidenav">
+    <a href="#" id="coming1"><i class="coming fas fa-globe fa-sm mr-4"></i> Coming Soon</a>
+    <a href="#" id="coming2"><i class="coming fas fa-paperclip fa-sm mr-4"></i> Coming Soon</a>
+    <a href="#" id="coming3"><i class="coming fas fa-tools fa-sm mr-4"></i> Coming Soon</a>
+    <a href="#" id="coming4"><i class="coming fas fa-link fa-sm mr-4"></i> Coming Soon</a>
+    <a href="https://softuni.bg/" target="blank" id="coming5"><i><img class="softuni" src="../Images/softuni.png"/></i>SoftUni</a>
+</div>
+
+</div>
+
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            });
+        }
+    </script>
+
+
+    <script>
+        $(document).ready(function () {
+            $(".active").removeClass("active");
+            $("#questions").addClass("active");
+        });
+    </script>
+
+
+
+    <script id="rendered-js">
+        var words = document.getElementsByClassName('word');
+        var wordArray = [];
+        var currentWord = 0;
+
+        words[currentWord].style.opacity = 1;
+        for (var i = 0; i < words.length; i++) {
+            splitLetters(words[i]);
+        }
+
+        function changeWord() {
+            var cw = wordArray[currentWord];
+            var nw = currentWord == words.length - 1 ? wordArray[0] : wordArray[currentWord + 1];
+            for (var i = 0; i < cw.length; i++) {
+                animateLetterOut(cw, i);
+            }
+
+            for (var i = 0; i < nw.length; i++) {
+                nw[i].className = 'letter behind';
+                nw[0].parentElement.style.opacity = 1;
+                animateLetterIn(nw, i);
+            }
+
+            currentWord = currentWord == wordArray.length - 1 ? 0 : currentWord + 1;
+        }
+
+        function animateLetterOut(cw, i) {
+            setTimeout(function () {
+                cw[i].className = 'letter out';
+            }, i * 80);
+        }
+
+        function animateLetterIn(nw, i) {
+            setTimeout(function () {
+                nw[i].className = 'letter in';
+            }, 340 + i * 80);
+        }
+
+        function splitLetters(word) {
+            var content = word.innerHTML;
+            word.innerHTML = '';
+            var letters = [];
+            for (var i = 0; i < content.length; i++) {
+                var letter = document.createElement('span');
+                letter.className = 'letter';
+                letter.innerHTML = content.charAt(i);
+                word.appendChild(letter);
+                letters.push(letter);
+            }
+
+            wordArray.push(letters);
+        }
+
+        changeWord();
+        setInterval(changeWord, 4000);
+    </script>
+
+
+    <script>
+        var first = ['Create', 'Cut', 'Reticulate'];
+        var second = ['you', 'clients', 'artists', 'us'];
+        var firstM = [], secondM = [], el;
+
+        var $first = $('.the-first');
+        var $second = $('.the-second');
+        var $container = $('#container');
+
+        // init static //
+        $first.text(first[0]);
+        $second.text(second[0]);
+
+        // create measurables //
+        for (var i = 0; i < first.length; i++) {
+            el = $('<div class="measurable">' + first[i] + '</div>');
+            $container.append(el);
+            firstM.push(el.width());
+        }
+        for (var i = 0; i < second.length; i++) {
+            el = $('<div class="measurable">' + second[i] + '</div>');
+            $container.append(el);
+            secondM.push(el.width());
+        }
+
+        // absolutize //
+        var positions = [];
+        $('#container > span').each(function () {
+            positions.push($(this).position());
+        });
+        $('#container > span').each(function () {
+            var pos = positions.shift();
+            $(this).css({
+                position: 'absolute',
+                left: pos.left,
+                top: pos.top
+            });
+        });
+
+        // remember initial sizes //
+        var firstInitialWidth = $first.width();
+        var secondInitialWidth = $second.width();
+
+        // loop the loop //
+        var activeWordsIndex = 0;
+        setInterval(function () {
+            activeWordsIndex++;
+            var firstIndex = activeWordsIndex % first.length;
+            var secondIndex = activeWordsIndex % second.length;
+
+            $first.text(first[firstIndex]);
+            $second.text(second[secondIndex]);
+
+            var firstLineOffset = (firstM[firstIndex] - firstInitialWidth) / 2;
+            var secondLineOffset = (secondM[secondIndex] - secondInitialWidth) / 2;
+
+            $('.static.first').css({
+                transform: 'translateX(' + firstLineOffset + 'px)'
+            });
+            $('.static.second').css({
+                transform: 'translateX(' + (-secondLineOffset) + 'px)'
+            });
+
+            $first.css({
+                transition: 'none',
+                transform: 'translate(' + (-firstLineOffset) + 'px, -30px)',
+                opacity: '0'
+            });
+            setTimeout(function () {
+                $first.css({
+                    transition: 'all 1s ease',
+                    transform: 'translate(' + (-firstLineOffset) + 'px, 0px)',
+                    opacity: '1'
+                });
+            }, 50);
+
+            $second.css({
+                transition: 'none',
+                transform: 'translate(' + (-secondLineOffset) + 'px, 30px)',
+                opacity: '0'
+            });
+            setTimeout(function () {
+                $second.css({
+                    transition: 'all 1s ease',
+                    transform: 'translate(' + (-secondLineOffset) + 'px, 0px)',
+                    opacity: '1'
+                });
+            }, 50);
+        }, 2000);
+    </script>

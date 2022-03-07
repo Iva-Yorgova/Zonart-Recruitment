@@ -1,0 +1,157 @@
+﻿@model AddContactModel
+
+@{
+    ViewData["Title"] = "Contact";
+}
+
+<!--peaces hover effect-->
+<div class="peaces">
+    <a class="frame" style="--img:url('../Images/z-s.svg');--w:141vmin;--h:72vmin;">
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+    </a>
+</div>
+
+
+<div class="container">
+    <div class="row-custom">
+        <div class="offset-sm-1 col-sm-10 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6 offset-md-3 col-md-6" style="padding-left:30px">
+            <div class="text-center text-dark mb-5 pb-5" style="margin-bottom:4rem">
+                <h1 class="title-contact">Hit us up, get a quick cost and time estimate.</h1>
+            </div>
+
+            <form method="post" enctype="multipart/form-data">
+
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="Name">Name</label>
+                    <input asp-for="Name" class="form-control mb-0" placeholder="">
+                    <span asp-validation-for="Name" class="small text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Email">Email</label>
+                    <input asp-for="Email" class="form-control mb-0" placeholder="">
+                    <span asp-validation-for="Email" class="small text-danger mt-2"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Message">Tell us about your project</label>
+                    <textarea asp-for="Message" rows="4" class="form-control mb-0" placeholder="">Tell us about your project</textarea>
+                    <span asp-validation-for="Message" class="small text-danger"></span>
+                </div>              
+
+                <div class="form-group" id="yourBtn" onclick="getFile()">upload a file</div>
+                <div style='height: 0px; width: 0px; overflow: hidden;'>
+                    <input asp-for="FormFile" type="file" name="FormFile" id="upfile" value="upload" onchange="sub(this)" />
+                </div>
+
+                <input class="btn btn-block" type="submit" value="Submit" style="margin-bottom: 100px" />
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!--<div class="row">
+    <div class="col-6 text-center" style="margin-top: 60px;">
+        <div class="post" href="#" style="text-align: center">
+            <h2 class="post-title">Fancy hovers is the next big thing in web design</h2>
+        </div>
+    </div>
+</div>-->
+
+
+
+<script>
+    // Add the following code if you want the name of the file appear on select
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
+
+<script>
+    function getFile(){
+        document.getElementById("upfile").click();
+    }
+
+    function sub(obj) {
+        var file = obj.value;
+        var fileName = file.split("\\");
+        document.getElementById("yourBtn").innerHTML = fileName[fileName.length - 1];
+        document.myForm.submit();
+        event.preventDefault();
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+        $(".active").removeClass("active");
+        $("#contact").addClass("active");
+    });
+</script>

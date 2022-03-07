@@ -1,0 +1,64 @@
+﻿@model AddTemplateModel
+
+@{
+    ViewData["Title"] = "Add Template";
+}
+
+
+<div class="container">
+    <div class="row-custom" style="padding-top:120px">
+        <div class="offset-sm-1 col-sm-10 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6 offset-md-3 col-md-6">
+            <div class="text-center text-dark mb-5 pb-5" style="margin-bottom:4rem; font-size:25px; font-variant-caps:all-petite-caps; letter-spacing:1px">
+                <h1 class="text-center">Add Template</h1>
+            </div>
+
+            <form method="post">
+
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="Name">Name</label>
+                    <input asp-for="Name" class="form-control mb-0" placeholder="">
+                    <span asp-validation-for="Name" class="small text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ImageUrl"></label>
+                    <input asp-for="ImageUrl" class="form-control mb-0" placeholder="">
+                    <span asp-validation-for="ImageUrl" class="small text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Category"></label>
+                    <input asp-for="Category" class="form-control mb-0" placeholder="">
+                    <span asp-validation-for="Category" class="small text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Description"></label>
+                    <textarea asp-for="Description" rows="4" class="form-control mb-0" placeholder=""></textarea>
+                    <span asp-validation-for="Description" class="small text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Price"></label>
+                    <input asp-for="Price" class="form-control mb-0" placeholder="...">
+                    <span asp-validation-for="Price" class="small text-danger"></span>
+                </div>
+
+                <div>
+                    <input class="btn btn-block" type="submit" value="Add" style="margin-bottom: 100px" />
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $(".active").removeClass("active");
+        $("#templates").addClass("active");
+    });
+</script>

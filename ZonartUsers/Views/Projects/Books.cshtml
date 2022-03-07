@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Books";
+}
+
+
+<div class="container text-center my-projects" style="background-color:#949598; padding-top:100px; font-family:Jost; padding-bottom: 50px">
+
+    <section style="display: inline-flex">
+        <a class="mb-1 mb-1 mr-2 pr-3 pl-3 pb-2 pt-2" asp-area="" asp-controller="Projects" asp-action="Brochures" id="brochures" style="color: white; ">Brochures</a>
+    </section>
+
+    <section style="display: inline-flex">
+        <a class="mb-1 mt-1 mr-2 pr-3 pl-3 pb-2 pt-2" asp-area="" asp-controller="Projects" asp-action="Logos" id="logos" style="color: white">Logos</a>
+    </section>
+
+    <section style="display: inline-flex">
+        <a class="mb-1 mt-1 mr-2 pr-3 pl-3 pb-2 pt-2" asp-area="" asp-controller="Projects" asp-action="Books" id="books" style="color:white; background-color: dimgray">Books</a>
+    </section>
+
+    <section style="display: inline-flex">
+        <a class="mb-1 mt-1 mr-2 pr-3 pl-3 pb-2 pt-2" asp-area="" asp-controller="Projects" asp-action="Posters" id="posters" style="color: white">Posters</a>
+    </section>
+
+    <section style="display: inline-flex">
+        <a class="mb-1 mt-1 mr-2 pr-3 pl-3 pb-2 pt-2" asp-area="" asp-controller="Projects" asp-action="Kids" id="kids" style="color:white">Kids</a>
+    </section>
+
+    <section style="display: inline-flex">
+        <a class="mb-1 mt-1 mr-2 pr-3 pl-3 pb-2 pt-2" asp-area="" asp-controller="Projects" asp-action="Web" id="web" style="color:white">Web</a>
+    </section>
+
+    <section style="display: inline-flex">
+        <a class="mb-1 mt-1 mr-2 pr-3 pl-3 pb-2 pt-2" asp-area="" asp-controller="Projects" asp-action="Stationary" id="stationary" style="color: white">Stationary</a>
+    </section>
+
+    <section style="display: inline-flex">
+        <a class="mb-1 mt-1 mr-2 pr-3 pl-3 pb-2 pt-2" asp-area="" asp-controller="Projects" asp-action="Variety" id="variety" style="color: white">Variety</a>
+    </section>
+
+</div>
+
+
+<div>
+    <img src="../Images/projects/books/books.jpg" style="max-width: 100%; height: auto; z-index: -1" />
+</div>
+
+
+
+<script>
+    $(document).ready(function () {
+        $(".active").removeClass("active");
+        $("#projects").addClass("active");
+    });
+</script>
+
+
+

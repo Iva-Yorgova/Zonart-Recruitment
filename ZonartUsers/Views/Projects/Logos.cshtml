@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "Logos";
+}
+
+
+<div class="container text-center my-projects" style="background-color:white; padding-top:100px; font-family:Jost; padding-bottom:50px; color:black">
+
+    <section style="display: inline-flex">
+        <a class="mb-1 mb-1 mr-2 pr-3 pl-3 pb-2 pt-2" asp-area="" asp-controller="Projects" asp-action="Brochures" id="brochures" style="border: 1.5px solid white; color: black; ">Brochures</a>
+    </section>
+
+    <section style="display: inline-flex">
+        <a class="mb-1 mt-1 mr-2 pr-3 pl-3 pb-2 pt-2" asp-area="" asp-controller="Projects" asp-action="Logos" id="logos" style="border: 1.5px solid white; color: white; background-color: dimgray">Logos</a>
+    </section>
+
+    <section style="display: inline-flex">
+        <a class="mb-1 mt-1 mr-2 pr-3 pl-3 pb-2 pt-2" asp-area="" asp-controller="Projects" asp-action="Books" id="books" style="border: 1.5px solid white; color: black">Books</a>
+    </section>
+
+    <section style="display: inline-flex">
+        <a class="mb-1 mt-1 mr-2 pr-3 pl-3 pb-2 pt-2" asp-area="" asp-controller="Projects" asp-action="Posters" id="posters" style=" border: 1.5px solid white;
+        color: black
+">Posters</a>
+    </section>
+
+    <section style="display: inline-flex">
+        <a class="mb-1 mt-1 mr-2 pr-3 pl-3 pb-2 pt-2" asp-area="" asp-controller="Projects" asp-action="Kids" id="kids" style="border: 1.5px solid white; color: black">Kids</a>
+    </section>
+
+    <section style="display: inline-flex">
+        <a class="mb-1 mt-1 mr-2 pr-3 pl-3 pb-2 pt-2" asp-area="" asp-controller="Projects" asp-action="Web" id="web" style="border: 1.5px solid white; color: black">Web</a>
+    </section>
+
+    <section style="display: inline-flex">
+        <a class="mb-1 mt-1 mr-2 pr-3 pl-3 pb-2 pt-2" asp-area="" asp-controller="Projects" asp-action="Stationary" id="stationary" style="border: 1.5px solid white; color: black">Stationary</a>
+    </section>
+
+    <section style="display: inline-flex">
+        <a class="mb-1 mt-1 mr-2 pr-3 pl-3 pb-2 pt-2" asp-area="" asp-controller="Projects" asp-action="Variety" id="variety" style="border: 1.5px solid white; color: black">Variety</a>
+    </section>
+
+</div>
+
+
+<div>
+    <img src="../Images/projects/logos/logos.jpg" style="max-width: 100%; height: auto; z-index: -1" />
+</div>
+
+
+
+<script>
+    $(document).ready(function () {
+        $(".active").removeClass("active");
+        $("#projects").addClass("active");
+    });
+</script>
+
+
+
