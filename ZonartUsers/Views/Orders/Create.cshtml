@@ -15,11 +15,13 @@
 
         <!--<div asp-validation-summary="All" class="text-danger"></div>-->
 
-        <div><img class="" style="width:10%; text-align:center" src='/Images/order.png' /></div>
+        <div>
+        <img class="order-img" style="" src='/Images/order.png' />
+        </div>
 
-        <p class="" style="margin-top:1rem; margin-bottom:1rem; text-align:center; font-variant-caps:all-petite-caps; font-weight:300; font-family:Montserrat; letter-spacing:1.5px; font-size:24px">Order for template</p>
+        <p>Order for template</p>
 
-        <h1 style="margin-bottom:5rem; text-align:center; font-variant-caps:all-petite-caps; font-size:30px">@Model.TemplateName</h1>
+        <h1>@Model.TemplateName</h1>
 
         <div class="form-group">
             <label asp-for="FullName">Your Full Name</label>
@@ -34,7 +36,7 @@
         </div>
 
         <div>
-            <input class="mt-lg-30 mt-30 col-lg-14 btn btn-block spacing-lg" type="submit" value="Order" style="margin-bottom: 20px" />
+            <input class="mt-lg-30 mt-30 col-lg-14 btn btn-block spacing-lg" type="submit" value="Order" />
         </div>
 
     </form>
