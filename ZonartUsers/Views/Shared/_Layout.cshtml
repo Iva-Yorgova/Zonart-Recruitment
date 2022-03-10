@@ -83,8 +83,8 @@
 
             <div class="topnav" id="myTopnav">
 
-                <a asp-area="" asp-controller="Home" asp-action="Index" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Home" id="home" style="padding-top:11px; padding-bottom: 13px">
-                    <img class="z-logo-icon" src="" alt="Zonart logo" style="" />
+                <a asp-area="" asp-controller="Home" asp-action="Index" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Home" id="home" class="topnav-logo">
+                    <img class="z-logo-icon" src="" alt="Zonart logo" />
                 </a>
 
                 <a asp-area="" asp-controller="About" asp-action="OurStory" id="about">About</a>
@@ -115,7 +115,7 @@
 
                 <a asp-area="" asp-controller="Contact" asp-action="Add" id="contact">Contact</a>
 
-                <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+                <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
 
                 @if (SignInManager.IsSignedIn(User))
                 {
@@ -123,17 +123,17 @@
 
                     if (userIsAdmin)
                     {
-            <a class="admin nav-right" style="float:right; font-weight: 100; width: 57px; height: 50px" asp-area="" asp-controller="Users" asp-action="WelcomeAdmin" id="admin" title="Admin" data-toggle="tooltip" data-placement="bottom" data-container="body">
+            <a class="admin nav-right" asp-area="" asp-controller="Users" asp-action="WelcomeAdmin" id="admin" title="Admin" data-toggle="tooltip" data-placement="bottom" data-container="body">
                 <img class="admin" alt="Admin" />
             </a> }
 
-            <a class="user-logout nav-right" style="float:right; font-weight: 100; width: 57px; height: 50px" asp-area="" asp-controller="Users" asp-action="Logout" id="logout" title="Logout" data-toggle="tooltip" data-placement="bottom" data-container="body">
+            <a class="user-logout nav-right" asp-area="" asp-controller="Users" asp-action="Logout" id="logout" title="Logout" data-toggle="tooltip" data-placement="bottom" data-container="body">
                 <img class="logout-user" alt="Logout" />
             </a> }
 
                 else
                 {
-            <a class="user-login nav-right float-right" style="" asp-area="" asp-controller="Users" asp-action="Login" id="login" title="Login" data-toggle="tooltip" data-placement="bottom" data-container="body">
+            <a class="user-login nav-right float-right" asp-area="" asp-controller="Users" asp-action="Login" id="login" title="Login" data-toggle="tooltip" data-placement="bottom" data-container="body">
                 <img class="login-user" alt="Login" />
             </a>
 
@@ -150,12 +150,12 @@
     </header>
 
 
-    <button id="myBtn" title="Go to top" style="color:lightgray" data-toggle="tooltip" data-placement="bottom" data-container="body">
+    <button id="myBtn" title="Go to top" data-toggle="tooltip" data-placement="bottom" data-container="body">
         <i class="material-icons">arrow_upward</i>
     </button>
 
 
-    <div class="container-fluid-new" style="padding-left: 0px; padding-right: 0px">
+    <div class="container-fluid-new">
         @if (TempData.ContainsKey(WebConstants.GlobalMessageKey))
         {
         <div class="row">
@@ -163,7 +163,7 @@
                 <div class="text-center text-dark mb-5 pb-5">
                     <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top:100px">
                         @TempData[WebConstants.GlobalMessageKey]
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="top:5px">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>

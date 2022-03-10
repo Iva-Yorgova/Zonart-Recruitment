@@ -17,6 +17,23 @@ body {
     }
 }
 
+.grid .grid-item > .grid-img {
+    display: block;
+    height: 100%;
+    max-width: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.login-title {
+    margin-top: 120px;
+}
+
+.register-title {
+    margin-top: 120px;
+    margin-bottom: 70px;
+}
+
 
 .logos-link section p {
     color: orangered;
@@ -90,6 +107,10 @@ body {
     top: 100px;
     position: relative;
     height: 1200px;
+}
+
+.custom-table {
+    border-collapse: unset;
 }
 
 

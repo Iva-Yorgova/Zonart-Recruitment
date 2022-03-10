@@ -100,8 +100,8 @@ namespace ZonartUsers.Controllers
             else
             {
                 await this.signInManager.SignInAsync(loggedInUser, true);
-                return RedirectToAction("Welcome", "Users", loggedInUser.Id);
-                //return RedirectToAction("Index", "Home");
+                //return RedirectToAction("Welcome", "Users", loggedInUser.Id);
+                return RedirectToAction("Index", "Home");
             }
         }
 
