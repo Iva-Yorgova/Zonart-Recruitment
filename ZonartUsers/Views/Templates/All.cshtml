@@ -24,26 +24,29 @@
 }
 
 
-<div class="row mt-0 ml-5 mr-5" style="">
+<div class="all-templates-box row mt-0 ml-5 mr-5">
+
     <div class="col-12">
-        <h2 style="font-size:34px; text-align:center; padding-top:100px; letter-spacing:1px">All Templates</h2>
+
+        <h1>All Templates</h1>
 
         @if (Model.Templates.Count() == 0)
         {
-            <h1 style="font-size:21px; text-align:center; padding-top:10px; padding-bottom:40px">We're sorry! We were not able to find any match. Try another search!</h1>
+            <h2>We're sorry! We were not able to find any match.<br />Try another search!</h2>
         }
 
     </div>
 
-
     @if (userIsAdmin)
     {
         <div class="container">
+
             <div class="row-custom">
-                <div class="offset-sm-1 col-sm-10 offset-lg-4 col-lg-4 offset-xl-4 col-xl-4 offset-md-4 col-md-4" style="margin-bottom:50px">
-                    <div>
-                        <a asp-area="" asp-controller="Templates" asp-action="Add" asp-route-id="" class="details-button mt-lg-30 mt-30 btn btn-block spacing-lg text-white pt-1 pb-1" style="background-color:dimgray; border:2px solid dimgray">Add New Template</a>
-                    </div>
+
+                <div class="add-template-btn offset-sm-1 col-sm-10 offset-lg-4 col-lg-4 offset-xl-4 col-xl-4 offset-md-4 col-md-4">
+                   
+                      <a asp-area="" asp-controller="Templates" asp-action="Add" asp-route-id="" class="mt-lg-30 mt-30 btn btn-block spacing-lg text-white pt-1 pb-1">Add New Template</a>
+                   
                 </div>
             </div>
         </div>
@@ -110,41 +113,35 @@
     </div>
 }
 
-<div class="row mb-2 pb-2 ml-5 mr-5">
+<section class="row mb-2 pb-2 ml-5 mr-5">
 
     @foreach (var template in Model.Templates)
-    {
-
-        <a class="template-card" asp-controller="Templates" asp-action="Details" asp-route-id="@template.Id">
+    {  
             <div class="col-md-4">
-                <div class="card mb-3 mt-2" style="border-radius: 0">
-                    <img class="card-img-top" style="border-radius: 0" src="@template.ImageUrl" alt="">
-                    <div class="card-body text-center pl-0 pr-0 pt-5 pb-0">
-                        <h2 class="card-title text-center mb-2" style="font-family: Jost; letter-spacing: 2px; font-weight: 700">@template.Name</h2>
-                        <h6 class="card-title text-center mb-4" style="font-weight: 100">@template.Price.00 USD</h6>
-                        <a asp-controller="Templates" asp-action="Details" asp-route-id="@template.Id" class="details-button mt-lg-30 mt-30 col-lg-14 btn btn-block spacing-lg text-white pt-1 pb-1" style="background-color:black; border: none">View</a>
+                <div class="card mb-3 mt-2">
+                    <img class="card-img-top" src="@template.ImageUrl" alt="">
+                    <div class="text-center pl-0 pr-0 pt-5 pb-0">
+                        <h2 class="card-title text-center mb-2">@template.Name</h2>
+                        <h6 class="card-title text-center mb-4">@template.Price.00 USD</h6>
+                        <a class="details-button mt-lg-30 mt-30 col-lg-14 btn btn-block spacing-lg text-white bg-info" asp-controller="Templates" asp-action="Details" asp-route-id="@template.Id">View</a>
 
                         @if (userIsAdmin)
                         {
-                            <div class="row" style="margin-right:0; margin-left:0">
-                                <div class="col pb-0" style="padding-right:0; padding-left:0">
-                                    <a asp-area="" asp-controller="Templates" asp-action="Edit" asp-route-id="@template.Id" class="details-button mt-lg-30 mt-30 btn btn-block spacing-lg text-white pt-1 pb-0" style="background-color:dimgray; border:none; width:100%">Edit</a>
+                            <div class="row mr-0 ml-0">
+                                <div class="col pb-0 pr-0 pl-0">
+                                    <a asp-area="" asp-controller="Templates" asp-action="Edit" asp-route-id="@template.Id" class="details-button mt-lg-30 mt-30 btn btn-block spacing-lg text-white pt-1 bg-success w-100">Edit</a>
                                 </div>
 
-                                <div class="col pb-0" style="padding-right:0; padding-left:0">
-                                    <a asp-controller="Templates" asp-action="Delete" asp-route-id="@template.Id" class="details-button mt-lg-30 mt-30 btn btn-block spacing-lg text-white pt-1 pb-0" style="background-color:orangered; border:none; width:100%">Delete</a>
-
+                                <div class="col pb-0 pr-0 pl-0">
+                                    <a asp-controller="Templates" asp-action="Delete" asp-route-id="@template.Id" class="details-button mt-lg-30 mt-30 btn btn-block spacing-lg text-white pt-1 bg-danger w-100">Delete</a>
                                 </div>
-
                             </div>
                         }
-
                     </div>
                 </div>
             </div>
-        </a>
     }
-</div>
+</section>
 
 @if (Model.Templates.Count() > 0)
 {

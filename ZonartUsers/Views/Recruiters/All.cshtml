@@ -4,7 +4,7 @@
 @inject UserManager<User> UserManager
 
 <div class="container">
-    <nav class="recruit-breadcrumb" aria-label="breadcrumb mt-5 mb-5">
+    <nav class="recruit-breadcrumb w-50" aria-label="breadcrumb mt-5 mb-5">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a class="not-active" href="/RecruitZone/Index">Home</a></li>
 
@@ -24,7 +24,7 @@
                         <div class="text-dark d-flex justify-content-center">
                             <label for="name" class="h4 mb-2">Filter Recruiters By Experience Level</label>
                         </div>
-                        <input type="text" class="form-control" id="name" name="level" />
+                        <input type="number" class="form-control text-secondary" id="name" name="level" placeholder="Experience Level Number" />
 
                     </div>
                     <div class="d-flex justify-content-center">
@@ -35,10 +35,10 @@
                 <div class="text-center mt-5">
                     @if (Model.Level <= 0)
                     {
-        <h2 id="tables" class="text-info btn-light text-md-center p-2">All Recruiters</h2>}
+                <h2 id="tables" class="text-info btn-light text-md-center p-2">All Recruiters</h2>}
                     @if (Model.Level > 0)
                     {
-        <h2 id="tables" class="text-info btn-light text-md-center p-2">Recruiters with Experience Level @Model.Level</h2>}
+                <h2 id="tables" class="text-info btn-light text-md-center p-2">Recruiters with Experience Level @Model.Level</h2>}
                 </div>
 
                 <div class="component">
