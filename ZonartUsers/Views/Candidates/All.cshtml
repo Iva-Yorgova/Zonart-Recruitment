@@ -6,29 +6,30 @@
    
     <div class="container">
 
-        <nav class="recruit-breadcrumb w-50" aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a class="not-active" href="/RecruitZone/Index">Home</a></li>
-
-                <li class="breadcrumb-item active" aria-current="page">Candidates</li>
-            </ol>
-        </nav>
-
         <div class="section">
             <div class="row">
-                <div class="candidates-box col-lg-12">
+                <div class="candidates-box col-lg-12 align-content-center">
+
+                    <nav class="recruit-breadcrumb w-75 m-auto" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a class="not-active" href="/RecruitZone/Index">RecruitZone</a></li>
+
+                            <li class="breadcrumb-item active" aria-current="page">Candidates</li>
+                        </ol>
+                    </nav>
 
                     <div class="text-center">
-                        <h2 id="tables">Candidates</h2>
+                        <h4 class="text-uppercase" id="tables">Candidates</h4>
                     </div>
 
-                    <div class="d-flex justify-content-center mb-5">
-                        <a class="btn btn-block btn-primary text-white mb-3" href="/Candidates/Create">Create Candidate</a>
-                    </div>
+                    <div class="w-75 align-content-center m-auto">
 
-                    <div class="component">
-                        <table class="custom-table table table-hover">
-                            <thead>
+                        <div class="d-flex justify-content-center m-auto">
+                            <a class="btn btn-block btn-primary text-white mb-3" href="/Candidates/Create">Create Candidate</a>
+                        </div>
+
+                        <table class="custom-table table table-hover table-responsive-lg mt-5">
+                            <thead class="bg-secondary text-white">
                                 <tr>
                                     <th scope="col">Name</th>
                                     <th scope="col">Recruiter</th>
@@ -57,9 +58,9 @@
 
                         @if (candidate.Interviews == 0)
                         {
-        <!--<td>
-        <a class="btn btn-block btn-success text-white mb-3" href="/Interviews/Add?id=@candidate.Id">Add Interview</a>
-    </td>-->}
+                <!--<td>
+    <a class="btn btn-block btn-success text-white mb-3" href="/Interviews/Add?id=@candidate.Id">Add Interview</a>
+</td>-->}
                         <td>
                             <a class="btn btn-block btn-primary text-white mb-3" href="/Candidates/Details?id=@candidate.Id">Details</a>
                         </td>

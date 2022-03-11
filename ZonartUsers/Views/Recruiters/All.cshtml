@@ -4,25 +4,27 @@
 @inject UserManager<User> UserManager
 
 <div class="container">
-    <nav class="recruit-breadcrumb w-50" aria-label="breadcrumb mt-5 mb-5">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a class="not-active" href="/RecruitZone/Index">Home</a></li>
-
-            <li class="breadcrumb-item active" aria-current="page">Recruiters</li>
-        </ol>
-    </nav>
+    
     <div class="section">
         <div class="row">
             <div class="recruiters-box col-lg-12">
 
+                <nav class="recruit-breadcrumb w-75 m-auto" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a class="not-active" href="/RecruitZone/Index">RecruitZone</a></li>
+
+                        <li class="breadcrumb-item active" aria-current="page">Recruiters</li>
+                    </ol>
+                </nav>
+
                 <div class="text-center">
-                    <h2 id="tables">Recruiters</h2>
+                    <h4 class="text-uppercase" id="tables">Recruiters</h4>
                 </div>
 
                 <form class="mx-auto w-50 mt-2" method="get">
                     <div class="form-group">
                         <div class="text-dark d-flex justify-content-center">
-                            <label for="name" class="h4 mb-2">Filter Recruiters By Experience Level</label>
+                            <label for="name" class="h3 mb-4">Filter Recruiters By Experience Level</label>
                         </div>
                         <input type="number" class="form-control text-secondary" id="name" name="level" placeholder="Experience Level Number" />
 
@@ -35,15 +37,15 @@
                 <div class="text-center mt-5">
                     @if (Model.Level <= 0)
                     {
-                <h2 id="tables" class="text-info btn-light text-md-center p-2">All Recruiters</h2>}
+            <h2 id="tables" class="text-primary text-lg-center p-2">All Recruiters</h2>}
                     @if (Model.Level > 0)
                     {
-                <h2 id="tables" class="text-info btn-light text-md-center p-2">Recruiters with Experience Level @Model.Level</h2>}
+            <h2 id="tables" class="text-info btn-light text-md-center p-2">Recruiters with Experience Level @Model.Level</h2>}
                 </div>
 
-                <div class="component">
-                    <table class="custom-table table table-hover">
-                        <thead>
+                <div class="w-75 align-content-center m-auto">
+                    <table class="custom-table table table-hover table-responsive-lg">
+                        <thead class="bg-secondary text-white">
                             <tr>
                                 <th scope="col">Name</th>
                                 <th scope="col">Country</th>
@@ -67,8 +69,7 @@
                     <td>
                         <a class="btn btn-block btn-primary text-white mb-3" href="/Recruiters/Details?id=@recruiter.Id">Details</a>
                     </td>
-                </tr>
-}
+                </tr>}
                         </tbody>
                     </table>
                 </div>

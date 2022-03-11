@@ -7992,7 +7992,7 @@ button.bg-dark:focus {
 
 .mt-3,
 .my-3 {
-  margin-top: 1rem !important;
+  margin-top: 1rem !important1rem !important;
 }
 
 .mr-3,
@@ -8002,7 +8002,7 @@ button.bg-dark:focus {
 
 .mb-3,
 .my-3 {
-  margin-bottom: unset;
+    margin-bottom: 1rem !important;
 }
 
 .ml-3,

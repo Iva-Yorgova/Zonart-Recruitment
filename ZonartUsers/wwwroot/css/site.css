@@ -261,11 +261,9 @@ for details on configuring this project to bundle and minify static web assets. 
     height: 1200px;
 }
 
-.custom-table {
-    border-collapse: unset;
+.details-box {
+    margin-top: 80px;
 }
-
-
 
 
 
@@ -1531,7 +1529,7 @@ p {
     font-size: 16px;
     cursor: pointer;
     font-family: 'Jost';
-    letter-spacing: 0px;
+    letter-spacing: 1px;
 }
 
 .default {

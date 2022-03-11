@@ -89,10 +89,9 @@ body {
     }
 
 .recruit-breadcrumb {
-   
     position: relative;
-    top: 100px;
-    left: 20px;
+    top: 0;
+    left: 0;
 }
 
     .recruit-breadcrumb a.not-active:hover {

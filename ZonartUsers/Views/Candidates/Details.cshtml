@@ -2,37 +2,38 @@
 
 <div class="container">
 
-    <nav class="recruit-breadcrumb w-50" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a class="not-active" href="/RecruitZone/Index">Home</a></li>
-            <li class="breadcrumb-item"><a class="not-active" href="/Candidates/All">Candidates</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Details</li>
-        </ol>
-    </nav>
+    
 
     <div class="section">
         <div class="row">
             <div class="candidates-box mb-5 pb-5 col-md-8 offset-md-2">
 
-                <div class="page-header text-center mb-5 mt-5">
+                <nav class="recruit-breadcrumb w-50 mb-5" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a class="not-active" href="/RecruitZone/Index">Home</a></li>
+                        <li class="breadcrumb-item"><a class="not-active" href="/Candidates/All">Candidates</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Details</li>
+                    </ol>
+                </nav>
+
+                <div class="text-center mb-5 mt-5">
                     <h2 id="tables">Candidate Details</h2>
                 </div>
 
-                <div class="card text-center">
+                <div class="card text-center p-3 m-3">
                     <div class="card-header">
-                        <h5 class="card-title">@Model.FirstName @Model.LastName </h5>
+                        <h2 class="card-title">@Model.FirstName @Model.LastName </h2>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item"><span class="text-black-50">Email: </span>@Model.Email</li>
                             <li class="list-group-item"><span class="text-black-50">Date of Birth: </span> @Model.BirthDate</li>
-                            <li class="list-group-item"></li>
                         </ul>
                     </div>
-                    <div class="pt-0 card-body">
+                    <div class="pt-0">
                         <p class="text-black-50 card-text">Bio: </p>
                         <p class="card-text">@Model.Bio</p>
 
-                        <div class="list-group mt-4">
-                            <button type="button" class="list-group-item list-group-item-action active bg-info">
+                        <div class="list-group mt-4 p-3">
+                            <button type="button" class="list-group-item list-group-item-action active bg-info text-white">
                                 Skills
                             </button>
 
@@ -44,9 +45,9 @@
                         @if (Model.Interviews == 0)
                         {
 
-            <a class="btn btn-block btn-success text-white mb-2 mt-3" href="/Interviews/Add?id=@Model.Id">Add Interview</a>}
+            <a class="btn btn-success text-white mb-2 mt-3 w-50" href="/Interviews/Add?id=@Model.Id">Add Interview</a>}
 
-                        <a href="/Candidates/Edit?id=@Model.Id" class="btn btn-primary mt-3">Edit</a>
+                        <a href="/Candidates/Edit?id=@Model.Id" class="btn btn-primary mt-3 mb-3 w-50">Edit</a>
 
                     </div>
 
