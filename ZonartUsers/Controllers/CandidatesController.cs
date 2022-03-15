@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using ZonartUsers.Infrastructure;
 using ZonartUsers.Models.Candidates;
 using Microsoft.AspNetCore.Authorization;
+using ZonartUsers.Services.Candidates;
 
 namespace ZonartUsers.Controllers
 {
@@ -14,28 +15,17 @@ namespace ZonartUsers.Controllers
     public class CandidatesController : Controller
     {
         private readonly ZonartUsersDbContext data;
+        private readonly ICandidatesService service;
 
-        public CandidatesController(ZonartUsersDbContext data) 
-            => this.data = data;
+        public CandidatesController(ZonartUsersDbContext data, ICandidatesService service)
+        {
+            this.data = data;
+            this.service = service;
+        }           
 
         public IActionResult All()
         {
-            var candidates = this.data
-                .Candidates
-                .OrderBy(c => c.FirstName)
-                .Select(c => new CandidateListingViewModel
-                {
-                    Id = c.Id,
-                    FirstName = c.FirstName,
-                    LastName = c.LastName,
-                    Email = c.Email,
-                    BirthDate = c.BirthDate,
-                    CandidateSkills = c.CandidateSkills,
-                    Recruiter = c.Recruiter,
-                    Interviews = this.data.Interviews.Where(i => i.CandidateName == c.FirstName + ' ' + c.LastName).Count()
-                })
-                .ToList();
-
+            var candidates = this.service.GetCandidates();
             return View(candidates);
         }
 
@@ -55,9 +45,7 @@ namespace ZonartUsers.Controllers
         public IActionResult Create(CreateCandidateFormModel model)
         {
                       
-            if (this.data.Candidates
-                .Any(c => c.FirstName == model.FirstName && 
-                c.LastName == model.LastName))
+            if (this.service.CheckCandidate(model))
             {
                 ModelState.AddModelError(string.Empty, "Candidate already exists!");
                 return View(model);
@@ -68,20 +56,12 @@ namespace ZonartUsers.Controllers
                 return View(model);
             }
 
-            if (string.IsNullOrEmpty(model.FirstName) || 
-                string.IsNullOrEmpty(model.LastName) ||
-                string.IsNullOrEmpty(model.Email) ||
-                string.IsNullOrEmpty(model.Bio) ||
-                string.IsNullOrEmpty(model.BirthDate) ||
-                string.IsNullOrEmpty(model.Skill) ||
-                string.IsNullOrEmpty(model.RecruiterName) ||
-                string.IsNullOrEmpty(model.RecruiterEmail) ||
-                string.IsNullOrEmpty(model.RecruiterCountry))
+            if (this.service.ValidateModel(model))
             {
                 return View(model);
             }
 
-            var recruiter = this.data.Recruiters.FirstOrDefault(r => r.Name == model.RecruiterName);
+            var recruiter = this.service.GetRecruiterByName(model.RecruiterName); 
 
             if (recruiter == null)
             {
@@ -121,7 +101,6 @@ namespace ZonartUsers.Controllers
             
             // TODO: Check if there is a job with skills that candidate have
 
-
             recruiter.Candidates.Add(candidate);
 
             this.data.Candidates.Add(candidate);          
@@ -133,22 +112,7 @@ namespace ZonartUsers.Controllers
 
         public IActionResult Details(string id)
         {
-            var candidate = this.data
-                .Candidates
-                .Where(c => c.Id == id)
-                .Select(c => new CandidateListingViewModel
-                {
-                    Id = c.Id,
-                    FirstName = c.FirstName,
-                    LastName = c.LastName,
-                    Email = c.Email,
-                    BirthDate = c.BirthDate,
-                    CandidateSkills = c.CandidateSkills,
-                    Bio = c.Bio,
-                    Interviews = this.data.Interviews.Where(i => i.CandidateName == c.FirstName + ' ' + c.LastName).Count()
-                })
-                .FirstOrDefault();
-
+            var candidate = this.service.GetCandidateListingById(id);
             return View(candidate);
         }
 
@@ -162,20 +126,7 @@ namespace ZonartUsers.Controllers
                 return View();
             }
 
-            var candidate = this.data.Candidates
-                .Where(c => c.Id == id)
-                .Select(c => new EditCandidateFormModel
-                {
-                    Id = c.Id,
-                    FirstName = c.FirstName,
-                    LastName = c.LastName,
-                    Email = c.Email,
-                    BirthDate = c.BirthDate,
-                    Bio = c.Bio,
-                    CandidateSkills = c.CandidateSkills
-                })
-                .FirstOrDefault();
-
+            var candidate = this.service.GetCandidateEditById(id);
             return View(candidate);
         }
 
@@ -183,9 +134,7 @@ namespace ZonartUsers.Controllers
         [Authorize]
         public IActionResult Edit(EditCandidateFormModel model)
         {
-
-            var candidateData = this.data.Candidates
-                .FirstOrDefault(t => t.Id == model.Id);
+            var candidateData = this.service.GetCandidateById(model.Id);
 
             if (candidateData == null)
             {
@@ -193,11 +142,7 @@ namespace ZonartUsers.Controllers
                 return View(model);
             }
 
-            if (string.IsNullOrEmpty(model.FirstName) ||
-                string.IsNullOrEmpty(model.LastName) ||
-                string.IsNullOrEmpty(model.Email) ||
-                string.IsNullOrEmpty(model.Bio) ||
-                string.IsNullOrEmpty(model.BirthDate))
+            if (this.service.ValidateEditModel(model))
             {
                 return View(model);
             }
@@ -225,9 +170,7 @@ namespace ZonartUsers.Controllers
 
         public IActionResult Delete(string id)
         {
-            var candidate = this.data.Candidates
-                .Where(c => c.Id == id)
-                .FirstOrDefault();
+            var candidate = this.service.GetCandidateById(id);
 
             var candidateSkills = this.data.CandidatesSkills
                 .Where(s => s.CandidateId == id)
