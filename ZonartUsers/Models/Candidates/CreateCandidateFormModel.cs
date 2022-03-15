@@ -6,7 +6,7 @@ namespace ZonartUsers.Models.Candidates
 {
     public class CreateCandidateFormModel
     {
-       
+
         public string Id { get; set; }
 
         [Required]

@@ -1,6 +1,9 @@
 ﻿﻿﻿ /* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
-
+.error-message {
+    border: 2px solid #dc3545;
+    padding: 20px;
+}
 
 /*---Template details---*/
 .container-fluid-new {
@@ -99,7 +102,8 @@ for details on configuring this project to bundle and minify static web assets. 
 
 /*---Add Templates---*/
 .add-template-box {
-    padding-top: 120px;
+    padding-top: 100px;
+    padding-bottom: 20px;
 }
 
 .add-template-title {
@@ -254,7 +258,6 @@ for details on configuring this project to bundle and minify static web assets. 
 .candidates-box {
     margin-top: 100px;
 }
-
 .create-candidate-box {
     top: 100px;
     position: relative;

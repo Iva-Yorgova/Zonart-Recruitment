@@ -81,7 +81,8 @@ namespace ZonartUsers
 
             app.UseResponseCaching();
 
-            app.UseCookiePolicy();       
+            app.UseCookiePolicy();   
+          
 
             app.UseEndpoints(endpoints =>
             {

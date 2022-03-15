@@ -67,7 +67,9 @@
                     <td>@recruiter.Interviews</td>
                     <td>@recruiter.FreeInterviewSlots</td>
                     <td>
-                        <a class="btn btn-block btn-primary text-white mb-3" href="/Recruiters/Details?id=@recruiter.Id">Details</a>
+
+                        <a class="btn btn-block btn-primary text-white mb-3" asp-controller="Recruiters" asp-action="Details" asp-route-id="@recruiter.Id">View</a>
+
                     </td>
                 </tr>}
                         </tbody>

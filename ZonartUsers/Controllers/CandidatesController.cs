@@ -42,6 +42,11 @@ namespace ZonartUsers.Controllers
         [Authorize]
         public IActionResult Create()
         {
+            if (!User.IsAdmin())
+            {
+                ModelState.AddModelError(string.Empty, "Invalid Credentials!");
+                return View();
+            }
             return View(new CreateCandidateFormModel());
         }
 
@@ -49,16 +54,13 @@ namespace ZonartUsers.Controllers
         [Authorize]
         public IActionResult Create(CreateCandidateFormModel model)
         {
-            if (!User.IsAdmin())
-            {
-                return BadRequest(InvalidCredentials);
-            }
-
+                      
             if (this.data.Candidates
                 .Any(c => c.FirstName == model.FirstName && 
                 c.LastName == model.LastName))
             {
-                return BadRequest("Candidate already exists!");
+                ModelState.AddModelError(string.Empty, "Candidate already exists!");
+                return View(model);
             }
 
             if (!ModelState.IsValid)
@@ -150,11 +152,19 @@ namespace ZonartUsers.Controllers
             return View(candidate);
         }
 
+
+        [Authorize]
         public IActionResult Edit(string id)
         {
+            if (!User.IsAdmin())
+            {
+                ModelState.AddModelError(string.Empty, "Invalid Credentials!");
+                return View();
+            }
+
             var candidate = this.data.Candidates
                 .Where(c => c.Id == id)
-                .Select(c => new CreateCandidateFormModel
+                .Select(c => new EditCandidateFormModel
                 {
                     Id = c.Id,
                     FirstName = c.FirstName,
@@ -170,7 +180,8 @@ namespace ZonartUsers.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(CreateCandidateFormModel model)
+        [Authorize]
+        public IActionResult Edit(EditCandidateFormModel model)
         {
 
             var candidateData = this.data.Candidates
@@ -178,7 +189,8 @@ namespace ZonartUsers.Controllers
 
             if (candidateData == null)
             {
-                return BadRequest("Candidate not found.");
+                ModelState.AddModelError(string.Empty, "Candidate not found.");
+                return View(model);
             }
 
             if (string.IsNullOrEmpty(model.FirstName) ||
@@ -187,7 +199,12 @@ namespace ZonartUsers.Controllers
                 string.IsNullOrEmpty(model.Bio) ||
                 string.IsNullOrEmpty(model.BirthDate))
             {
-                return BadRequest("All fields are required!");
+                return View(model);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
             }
 
             candidateData.FirstName = model.FirstName;

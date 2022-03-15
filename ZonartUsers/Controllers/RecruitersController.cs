@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using ZonartUsers.Data;
+using ZonartUsers.Infrastructure;
 using ZonartUsers.Models.Recruiters;
 
 namespace ZonartUsers.Controllers
@@ -74,6 +75,12 @@ namespace ZonartUsers.Controllers
 
         public IActionResult Edit(string id)
         {
+            if (!User.IsAdmin())
+            {
+                ModelState.AddModelError(string.Empty, "Invalid Credentials!");
+                return View();
+            }
+
             var recruiter = this.data.Recruiters
                 .Where(r => r.Id == id)
                 .Select(r => new RecruiterListingViewModel
