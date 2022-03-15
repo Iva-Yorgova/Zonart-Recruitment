@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Grpc.Core;
+using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using ZonartUsers.Data;
 using ZonartUsers.Data.Models;
@@ -39,6 +40,13 @@ namespace ZonartUsers.Controllers
             {
                 var basePath = Path.Combine(Directory.GetCurrentDirectory() + "\\Files\\");
                 var filePath = Path.Combine(basePath, file.FileName);
+
+                Directory.CreateDirectory(basePath);
+
+                using (Stream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+                {
+                    file.CopyTo(fileStream);
+                }
 
                 contactData = new Contact
                 {

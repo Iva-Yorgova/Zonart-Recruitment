@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ZonartUsers.Services.Candidates;
 
 namespace ZonartUsers
 {
@@ -51,6 +52,7 @@ namespace ZonartUsers
 
             services.AddTransient<IStatisticsService, StatisticsService>();
             services.AddTransient<ITemplateService, TemplateService>();
+            services.AddTransient<ICandidatesService, CandidatesServise>();
 
             services.AddResponseCaching();
             services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_CONNECTIONSTRING"]);

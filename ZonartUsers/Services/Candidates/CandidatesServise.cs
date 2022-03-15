@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using ZonartUsers.Data;
 using ZonartUsers.Models.Candidates;
 using ZonartUsers.Data.Models;
-using Microsoft.AspNetCore.Mvc;
-using ZonartUsers.Infrastructure;
-using Microsoft.AspNetCore.Authorization;
-using ZonartUsers.Services.Candidates;
 
 namespace ZonartUsers.Services.Candidates
 {
-    public class CandidateServise : ICandidatesService
+    public class CandidatesServise : ICandidatesService
     {
 
         private readonly ZonartUsersDbContext data;
 
-        public CandidateServise(ZonartUsersDbContext data)
+        public CandidatesServise(ZonartUsersDbContext data)
         {
             this.data = data;
         }
