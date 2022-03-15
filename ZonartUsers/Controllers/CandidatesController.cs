@@ -65,12 +65,7 @@ namespace ZonartUsers.Controllers
 
             if (recruiter == null)
             {
-                recruiter = new Recruiter
-                {
-                    Name = model.RecruiterName,
-                    Epost = model.RecruiterEmail,
-                    Country = model.RecruiterCountry
-                };
+                recruiter = this.service.CreateRecruiter(model);
                 this.data.Recruiters.Add(recruiter);
             }
             else
@@ -78,15 +73,7 @@ namespace ZonartUsers.Controllers
                 recruiter.ExperienceLevel++;    
             }
 
-            var candidate = new Candidate
-            {
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                Email = model.Email,
-                BirthDate = model.BirthDate,
-                Bio = model.Bio,
-                RecruiterId = recruiter.Id
-            };
+            var candidate = this.service.CreateCandidate(model, recruiter);
 
             if (!this.data.Skills.Any(s => s.Name == model.Skill))
             {
@@ -152,11 +139,7 @@ namespace ZonartUsers.Controllers
                 return View(model);
             }
 
-            candidateData.FirstName = model.FirstName;
-            candidateData.LastName = model.LastName;
-            candidateData.Bio = model.Bio;
-            candidateData.BirthDate = model.BirthDate;
-            candidateData.Email = model.Email;
+            this.service.UpdateCandidateData(candidateData, model);
 
             if (model.Skill != null)
             {

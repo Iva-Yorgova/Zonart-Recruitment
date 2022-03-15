@@ -130,5 +130,39 @@ namespace ZonartUsers.Services.Candidates
 
             return invalidEditModel;
         }
+
+        public Recruiter CreateRecruiter(CreateCandidateFormModel model)
+        {
+            Recruiter recruiter = new Recruiter
+            {
+                Name = model.RecruiterName,
+                Epost = model.RecruiterEmail,
+                Country = model.RecruiterCountry
+            };
+            return recruiter;
+        }
+
+        public Candidate CreateCandidate(CreateCandidateFormModel model, Recruiter recruiter)
+        {
+            Candidate candidate = new Candidate
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Email = model.Email,
+                BirthDate = model.BirthDate,
+                Bio = model.Bio,
+                RecruiterId = recruiter.Id
+            };
+            return candidate;
+        }
+
+        public void UpdateCandidateData(Candidate candidateData, EditCandidateFormModel model)
+        {
+            candidateData.FirstName = model.FirstName;
+            candidateData.LastName = model.LastName;
+            candidateData.Bio = model.Bio;
+            candidateData.BirthDate = model.BirthDate;
+            candidateData.Email = model.Email;
+        }
     }
 }

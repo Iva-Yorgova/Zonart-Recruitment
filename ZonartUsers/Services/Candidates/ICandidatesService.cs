@@ -17,6 +17,8 @@ namespace ZonartUsers.Services.Candidates
 
         Candidate GetCandidateById(string id);
 
+        Candidate CreateCandidate(CreateCandidateFormModel model, Recruiter recruiter);
+
         bool CheckCandidate(CreateCandidateFormModel model);
 
         bool ValidateModel(CreateCandidateFormModel model);
@@ -24,5 +26,9 @@ namespace ZonartUsers.Services.Candidates
         bool ValidateEditModel(EditCandidateFormModel model);
 
         Recruiter GetRecruiterByName(string name);
+
+        Recruiter CreateRecruiter(CreateCandidateFormModel model);
+
+        void UpdateCandidateData(Candidate candidateData, EditCandidateFormModel model);
     }
 }
