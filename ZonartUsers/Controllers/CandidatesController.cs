@@ -1,11 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
 using System.Linq;
 using ZonartUsers.Data;
 using ZonartUsers.Data.Models;
+using Microsoft.AspNetCore.Mvc;
+using ZonartUsers.Infrastructure;
 using ZonartUsers.Models.Candidates;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ZonartUsers.Controllers
 {
+    using static WebConstants;
+
     public class CandidatesController : Controller
     {
         private readonly ZonartUsersDbContext data;
@@ -34,19 +39,31 @@ namespace ZonartUsers.Controllers
             return View(candidates);
         }
 
+        [Authorize]
         public IActionResult Create()
         {
-            return View();
+            return View(new CreateCandidateFormModel());
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Create(CreateCandidateFormModel model)
         {
+            if (!User.IsAdmin())
+            {
+                return BadRequest(InvalidCredentials);
+            }
+
             if (this.data.Candidates
                 .Any(c => c.FirstName == model.FirstName && 
                 c.LastName == model.LastName))
             {
                 return BadRequest("Candidate already exists!");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
             }
 
             if (string.IsNullOrEmpty(model.FirstName) || 
@@ -59,7 +76,7 @@ namespace ZonartUsers.Controllers
                 string.IsNullOrEmpty(model.RecruiterEmail) ||
                 string.IsNullOrEmpty(model.RecruiterCountry))
             {
-                return BadRequest("All fields are required!");
+                return View(model);
             }
 
             var recruiter = this.data.Recruiters.FirstOrDefault(r => r.Name == model.RecruiterName);
@@ -100,8 +117,7 @@ namespace ZonartUsers.Controllers
                 candidate.CandidateSkills.Add(new CandidateSkill{ Name = model.Skill });
             }
             
-            // Check if there is a job with skills that candidate have
-
+            // TODO: Check if there is a job with skills that candidate have
 
 
             recruiter.Candidates.Add(candidate);
@@ -156,12 +172,7 @@ namespace ZonartUsers.Controllers
         [HttpPost]
         public IActionResult Edit(CreateCandidateFormModel model)
         {
-            // Validation!
-            //if (!ModelState.IsValid)
-            //{
-            //    return View(template);
-            //}
-           
+
             var candidateData = this.data.Candidates
                 .FirstOrDefault(t => t.Id == model.Id);
 

@@ -1,69 +1,70 @@
-﻿<div class="row">
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@{
+    ViewData["Title"] = "Candidate Edit";
+}
+
+@model CreateCandidateFormModel 
+
+
+<div class="row">
     <div class="edit-template-box col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-        <div class="row mt-5 ml-5 mr-5" style="">
+        <div class="row mt-5 ml-5 mr-5">
             <div class="col-12">
                 <h2 class="edit-template-title">Edit Candidate</h2>
             </div>
         </div>
 
-        <form class="my-custom-form pb-5 mx-auto" method="post">
+        <form method="post">
+
             <div class="form-group">
-                <div class="text-dark d-flex justify-content-center">
-                    <label for="name" class="h3 mb-2">First Name</label>
-                </div>
-                <input type="text" class="form-control" id="name" name="firstName" value="@Model.FirstName" />
-            </div>
-            <div class="form-group">
-                <div class="text-dark d-flex justify-content-center">
-                    <label for="name" class="h3 mb-2">Last Name</label>
-                </div>
-                <input type="text" class="form-control" id="name" name="lastName" value="@Model.LastName" />
-            </div>
-            <div class="form-group">
-                <div class="text-dark d-flex justify-content-center">
-                    <label for="name" class="h3 mb-2">Email</label>
-                </div>
-                <input type="text" class="form-control" id="name" name="email" value="@Model.Email" />
-            </div>
-            <div class="form-group">
-                <div class="text-dark d-flex justify-content-center">
-                    <label for="name" class="h3 mb-2">Bio</label>
-                </div>
-                <textarea type="text" class="form-control" id="name" name="bio" value="@Model.Bio">@Model.Bio</textarea>
-            </div>
-            <div class="form-group">
-                <div class="text-dark d-flex justify-content-center">
-                    <label for="name" class="h3 mb-2">Birthdate</label>
-                </div>
-                <input type="text" class="form-control" id="name" name="birthDate" value="@Model.BirthDate" />
+                <label asp-for="FirstName">First Name</label>
+                <input asp-for="FirstName" class="form-control" placeholder="First Name...">
+                <span asp-validation-for="FirstName" class="small text-danger"></span>
             </div>
 
-            <div class="text-center bg-white mb-5">
-                <div>
-                    <button type="button" class="list-group-item list-group-item-action active bg-info mb-2">
-                        Current Skills
-                    </button>
-
-                    @foreach (var skill in Model.CandidateSkills)
-                    {
-                        <p>@skill.Name</p>}
-                </div>
+            <div class="form-group">
+                <label asp-for="LastName">Last Name</label>
+                <input asp-for="LastName" class="form-control" placeholder="Last Name...">
+                <span asp-validation-for="LastName" class="small text-danger"></span>
             </div>
 
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" placeholder="Email...">
+                <span asp-validation-for="Email" class="small text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Bio"></label>
+                <textarea asp-for="Bio" class="form-control" placeholder="Price...">@Model.Bio</textarea>
+                <span asp-validation-for="Bio" class="small text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="BirthDate">Birthdate</label>
+                <input asp-for="BirthDate" class="form-control" placeholder="Birthdate...">
+                <span asp-validation-for="BirthDate" class="small text-danger"></span>
+            </div>
+
+            <div class="bg-white mb-5">
+                <div class="list-group-item list-group-item-action active bg-info mb-2">
+                    Current Skills
+                </div>
+                @foreach (var skill in Model.CandidateSkills)
+                {<p class="p-2 pl-3 m-0">@skill.Name</p>}
+            </div>
 
             <div class="form-group mt-3">
-                <div class="text-dark d-flex justify-content-center">
-                    <label for="name" class="h3 mb-2">Add Skill</label>
-                </div>
-                <input type="text" class="form-control" id="name" name="skill" />
+                <label asp-for="Skill">Add Skill</label>
+                <input asp-for="Skill" class="form-control" placeholder="Skill Name...">
             </div>
 
-            <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-block btn-primary text-white mb-3">Save</button>
-            </div>
+            <input class="btn mt-3" type="submit" value="Save" />
         </form>
-
     </div>
-
 </div>
 

@@ -71,5 +71,51 @@ namespace ZonartUsers.Controllers
 
             return View(recruiter);
         }
+
+        public IActionResult Edit(string id)
+        {
+            var recruiter = this.data.Recruiters
+                .Where(r => r.Id == id)
+                .Select(r => new RecruiterListingViewModel
+                {
+                    Id = r.Id,
+                    Name = r.Name,
+                    Epost = r.Epost,
+                    Country = r.Country,
+                    ExperienceLevel = r.ExperienceLevel,
+                    FreeInterviewSlots = r.FreeInterviewSlots,
+                    Candidates = r.Candidates
+                })
+                .FirstOrDefault();
+
+            return View(recruiter);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(RecruiterListingViewModel model)
+        {
+
+            var recruiterData = this.data.Recruiters
+                .FirstOrDefault(t => t.Id == model.Id);
+
+            if (recruiterData == null)
+            {
+                return BadRequest("Recruiter not found.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            recruiterData.Name = model.Name;
+            recruiterData.Epost = model.Epost;
+            recruiterData.Country = model.Country;
+            recruiterData.ExperienceLevel = model.ExperienceLevel;
+
+            this.data.SaveChanges();
+
+            return Redirect("/Recruiters/All");
+        }
     }
 }

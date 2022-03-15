@@ -33,6 +33,11 @@ namespace ZonartUsers.Services.Templates
                 return false;
             }
 
+            if (string.IsNullOrEmpty(name)  || price <= 0 || string.IsNullOrEmpty(description) || string.IsNullOrEmpty(category) || string.IsNullOrEmpty(imageUrl))
+            {
+                return false;
+            }
+
             templateData.Name = name;
             templateData.Price = price;
             templateData.Description = description;

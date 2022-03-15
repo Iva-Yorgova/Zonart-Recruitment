@@ -1,87 +1,89 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿@model CreateCandidateFormModel
 
-@inject SignInManager<User> SignInManager
-@inject UserManager<User> UserManager
+@{
+    ViewData["Title"] = "Create Candidate";
+}
 
 
-<div class="create-candidate-box">
+    <div class="create-candidate-box col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
 
-    <nav class="recruit-breadcrumb w-50 m-auto" aria-label="breadcrumb">
-        <ol class="breadcrumb p-0">
-            <li class="breadcrumb-item"><a class="not-active" href="/RecruitZone/Index">Home</a></li>
-            <li class="breadcrumb-item"><a class="not-active" href="/Candidates/All">Candidates</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Create</li>
-        </ol>
-    </nav>
+        <nav class="recruit-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb p-0">
+                <li class="breadcrumb-item"><a class="not-active" href="/RecruitZone/Index">RecruitZone</a></li>
+                <li class="breadcrumb-item"><a class="not-active" href="/Candidates/All">Candidates</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Create</li>
+            </ol>
+        </nav>
 
-    <h2 class="text-lg-center mt-5">Create Candidate</h2>
-    <hr class="bg-primary w-50">
-    <form class="my-custom-form pb-5 mx-auto w-50 mt-5" method="post">
-        <div>
-            <div class="text-dark d-flex justify-content-center">
-                <label for="name" class="h3 mb-2">First Name</label>
-            </div>
-            <input type="text" class="form-control" id="name" name="firstName" />
-        </div>
-        <div>
-            <div class="text-dark d-flex justify-content-center">
-                <label for="name" class="h3 mb-2">Last Name</label>
-            </div>
-            <input type="text" class="form-control" id="name" name="lastName" />
-        </div>
-        <div>
-            <div class="text-dark d-flex justify-content-center">
-                <label for="name" class="h3 mb-2">Email</label>
-            </div>
-            <input type="text" class="form-control" id="name" name="email" />
-        </div>
-        <div>
-            <div class="text-dark d-flex justify-content-center">
-                <label for="name" class="h3 mb-2">Bio</label>
-            </div>
-            <textarea type="text" class="form-control" id="name" name="bio"></textarea>
-        </div>
-        <div>
-            <div class="text-dark d-flex justify-content-center">
-                <label for="name" class="h3 mb-2">Birthdate</label>
-            </div>
-            <input type="text" class="form-control" id="name" name="birthDate" />
-        </div>
-        <div>
-            <div class="text-dark d-flex justify-content-center">
-                <label for="name" class="h3 mb-2">Skill</label>
-            </div>
-            <input type="text" class="form-control" id="name" name="skill" />
+        <div class="add-template-title text-center text-dark mb-5 pb-5">
+            <h1 class="text-center">Create Candidate</h1>
         </div>
 
-        <h2 class="text-center mt-5">Recruiter Information</h2>
-        <hr class="bg-primary w-100">
-        <div>
-            <div class="text-dark d-flex justify-content-center">
-                <label for="name" class="h3 mb-2">Last Name</label>
-            </div>
-            <input type="text" class="form-control" id="name" name="recruiterName" />
-        </div>
-        <div>
-            <div class="text-dark d-flex justify-content-center">
-                <label for="name" class="h3 mb-2">Email</label>
-            </div>
-            <input type="text" class="form-control" id="name" name="recruiterEmail" />
-        </div>
-        <div>
-            <div class="text-dark d-flex justify-content-center">
-                <label for="name" class="h3 mb-2">Country</label>
-            </div>
-            <input type="text" class="form-control" id="name" name="recruiterCountry" />
-        </div>
+        <form method="post">
 
-        <div class="d-flex justify-content-center">
-            <button type="submit" class="btn btn-block btn-primary text-white text-uppercase mb-3 mt-5">Create</button>
-        </div>
-    </form>
-</div>
+            <!--<div asp-validation-summary="All" class="text-danger"></div>-->
 
-<script>$(document).ready(function () {
+            <div class="form-group">
+                <label asp-for="FirstName">First Name</label>
+                <input asp-for="FirstName" class="form-control mb-0" placeholder="">
+                <span asp-validation-for="FirstName" class="small text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="LastName"></label>
+                <input asp-for="LastName" class="form-control mb-0" placeholder="">
+                <span asp-validation-for="LastName" class="small text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control mb-0" placeholder="">
+                <span asp-validation-for="Email" class="small text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Bio"></label>
+                <textarea asp-for="Bio" rows="4" class="form-control mb-0" placeholder=""></textarea>
+                <span asp-validation-for="Bio" class="small text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="BirthDate">Birthdate</label>
+                <input asp-for="BirthDate" class="form-control mb-0" placeholder="">
+                <span asp-validation-for="BirthDate" class="small text-danger"></span>
+            </div>
+
+            <h2 class="text-center mt-5">Recruiter Information</h2>
+            <hr class="bg-primary w-100">
+
+            <div class="form-group">
+                <label asp-for="RecruiterName">Recruiter Name</label>
+                <input asp-for="RecruiterName" class="form-control mb-0" placeholder="">
+                <span asp-validation-for="RecruiterName" class="small text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="RecruiterEmail">Recruiter Email</label>
+                <input asp-for="RecruiterEmail" class="form-control mb-0" placeholder="">
+                <span asp-validation-for="RecruiterEmail" class="small text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="RecruiterCountry">Recruiter Country</label>
+                <input asp-for="RecruiterCountry" class="form-control mb-0" placeholder="">
+                <span asp-validation-for="RecruiterCountry" class="small text-danger"></span>
+            </div>
+
+            <div>
+                <input class="btn mb-5" type="submit" value="Create" />
+            </div>
+
+        </form>
+    </div>
+
+
+<script>
+    $(document).ready(function () {
         $(".active").removeClass("active");
         $("#recruit").addClass("active");
-});</script>
+    });</script>

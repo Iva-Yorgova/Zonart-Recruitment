@@ -116,11 +116,7 @@ namespace ZonartUsers.Controllers
         [HttpPost]
         [Authorize]
         public IActionResult Edit(TemplateListingViewModel template)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(template);
-            }
+        {       
 
             var edited = this.service.Edit(
                 template.Id,
@@ -132,7 +128,12 @@ namespace ZonartUsers.Controllers
 
             if (!edited)
             {
-                return BadRequest();
+                return View(template);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(template);
             }
 
             TempData[GlobalMessageKey] = TemplateEdited;

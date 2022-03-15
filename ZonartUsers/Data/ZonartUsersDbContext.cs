@@ -17,8 +17,6 @@ namespace ZonartUsers.Data
 
         public DbSet<Template> Templates { get; set; }
 
-        public DbSet<Question> Questions { get; set; }
-
 
 
         public DbSet<Recruiter> Recruiters { get; set; }

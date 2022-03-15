@@ -16,7 +16,6 @@ namespace ZonartUsers.Models.Templates
         [Required]
         public string Category { get; set; }
 
-
         [Required]
         public double Price { get; set; }
 

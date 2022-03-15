@@ -108,7 +108,16 @@ namespace ZonartUsers.Controllers
         
         [Authorize]
         public async Task<IActionResult> Logout()
-        {           
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+            var loggedInUser = this.userManager.FindByEmailAsync(user.Email).Result;
+
+            if (loggedInUser == null)
+            {
+                ModelState.AddModelError(string.Empty, InvalidCredentials);
+                return BadRequest("Invalid credentials!");
+            }
+
             await signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }

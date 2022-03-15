@@ -80,9 +80,6 @@ namespace ZonartUsers.Data.Migrations
                 name: "Orders");
 
             migrationBuilder.DropTable(
-                name: "Bags");
-
-            migrationBuilder.DropTable(
                 name: "Templates");
 
             migrationBuilder.DropTable(
