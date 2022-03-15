@@ -34,9 +34,7 @@ namespace ZonartUsers.Controllers
 
             if (!string.IsNullOrWhiteSpace(query.SearchTerm))
             {
-                templatesQuery = templatesQuery
-                    .Where(t => t.Description.ToLower().Contains(query.SearchTerm.ToLower())
-                    || t.Name.ToLower().Contains(query.SearchTerm.ToLower()));
+                templatesQuery = this.service.GetTemplatesBySearchTerm(templatesQuery, query);
             }
 
             var categories = this.data.Templates
@@ -44,32 +42,16 @@ namespace ZonartUsers.Controllers
                 .Distinct()
                 .ToList();
 
-            templatesQuery = query.Sorting switch
-            {
-                TemplateSorting.Price => templatesQuery.OrderByDescending(t => t.Price),
-                TemplateSorting.Category => templatesQuery.OrderBy(t => t.Category),
-                TemplateSorting.DateCreated or _ => templatesQuery.OrderByDescending(t => t.Id)
-            };
+            templatesQuery = this.service.SortTemplateQuery(templatesQuery, query);
+
             var totalTemplates = templatesQuery.Count();
 
-            var templates = templatesQuery
-                .Skip((query.CurrentPage - 1) * AllTemplatesModel.TemplatesPerPage)
-                .Take(AllTemplatesModel.TemplatesPerPage)
-                .Select(t => new TemplateListingViewModel
-                {
-                    Id = t.Id,
-                    Name = t.Name,
-                    ImageUrl = t.ImageUrl,
-                    Price = t.Price, 
-                    Description = t.Description,
-                    Category = t.Category
-                })
-                .ToList();
+            var templates = this.service.GetTemplatesQuery(templatesQuery, query);
 
             query.Categories = categories;
             query.Templates = templates;
             query.TotalTemplates = totalTemplates;     
-            query.DbTemplates = service.GetTemplates();
+            query.DbTemplates = this.service.GetTemplates();
 
             return View(query);
         }
@@ -77,18 +59,7 @@ namespace ZonartUsers.Controllers
 
         public IActionResult Details(int id)
         {
-            var template = this.data.Templates
-                .Where(t => t.Id == id)
-                .Select(t => new TemplateLayoutModel
-                {
-                    Id = id,
-                    Name = t.Name,
-                    Description = t.Description,
-                    Category = t.Category,
-                    Price = t.Price
-                })
-                .FirstOrDefault();
-
+            var template = this.service.GetTemplateLayoutById(id);
             return View(template); 
         }
 
@@ -96,19 +67,7 @@ namespace ZonartUsers.Controllers
         [Authorize]
         public IActionResult Edit(int id)
         {
-            var template = this.data.Templates
-                .Where(t => t.Id == id)
-                .Select(t => new TemplateListingViewModel
-                {
-                    Name = t.Name,
-                    Price = t.Price,
-                    ImageUrl = t.ImageUrl, 
-                    Description = t.Description,
-                    Category = t.Category,
-                    Id = id
-                })
-                .FirstOrDefault();
-
+            var template = this.service.GetTemplateListingById(id);
             return View(template);
         }
 
@@ -168,7 +127,6 @@ namespace ZonartUsers.Controllers
             TempData[GlobalMessageKey] = TemplateAdded;
 
             return RedirectToAction("All", "Templates");
-
         }
 
 
@@ -190,7 +148,6 @@ namespace ZonartUsers.Controllers
             TempData[GlobalMessageKey] = TemplateDeleted;
 
             return RedirectToAction("All", "Templates");
-
         }
 
     }

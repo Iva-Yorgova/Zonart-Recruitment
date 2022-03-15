@@ -1,6 +1,8 @@
 ﻿
 
 using System.Collections.Generic;
+using System.Linq;
+using ZonartUsers.Data.Models;
 using ZonartUsers.Models.Templates;
 
 namespace ZonartUsers.Services.Templates
@@ -26,5 +28,15 @@ namespace ZonartUsers.Services.Templates
             int templateId);
 
         List<TemplateListingViewModel> GetTemplates();
+
+        List<TemplateListingViewModel> GetTemplatesQuery(IQueryable<Template> templatesQuery, AllTemplatesModel query);
+
+        IQueryable<Template> SortTemplateQuery(IQueryable<Template> templatesQuery, AllTemplatesModel query);
+
+        IQueryable<Template> GetTemplatesBySearchTerm(IQueryable<Template> templatesQuery, AllTemplatesModel query);
+
+        TemplateLayoutModel GetTemplateLayoutById(int id);
+
+        TemplateListingViewModel GetTemplateListingById(int id);
     }
 }

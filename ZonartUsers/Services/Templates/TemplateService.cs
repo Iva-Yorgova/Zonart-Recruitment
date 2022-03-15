@@ -109,5 +109,80 @@ namespace ZonartUsers.Services.Templates
             
             return dbTemplates;
         }
+
+        public List<TemplateListingViewModel> GetTemplatesQuery(IQueryable<Template> templatesQuery, AllTemplatesModel query)
+        {
+            var templates = templatesQuery
+                .Skip((query.CurrentPage - 1) * AllTemplatesModel.TemplatesPerPage)
+                .Take(AllTemplatesModel.TemplatesPerPage)
+                .Select(t => new TemplateListingViewModel
+                {
+                    Id = t.Id,
+                    Name = t.Name,
+                    ImageUrl = t.ImageUrl,
+                    Price = t.Price,
+                    Description = t.Description,
+                    Category = t.Category
+                })
+                .ToList();
+
+            return templates;
+        }
+
+        public IQueryable<Template> SortTemplateQuery(IQueryable<Template> templatesQuery, AllTemplatesModel query)
+        {
+            templatesQuery = query.Sorting switch
+            {
+                TemplateSorting.Price => templatesQuery.OrderByDescending(t => t.Price),
+                TemplateSorting.Category => templatesQuery.OrderBy(t => t.Category),
+                TemplateSorting.DateCreated or _ => templatesQuery.OrderByDescending(t => t.Id)
+            };
+
+            return templatesQuery;
+        }
+
+        public IQueryable<Template> GetTemplatesBySearchTerm(IQueryable<Template> templatesQuery, AllTemplatesModel query)
+        {
+            templatesQuery = templatesQuery
+                    .Where(t => t.Description.ToLower().Contains(query.SearchTerm.ToLower())
+                    || t.Name.ToLower().Contains(query.SearchTerm.ToLower()));
+
+            return templatesQuery;
+        }
+
+        public TemplateLayoutModel GetTemplateLayoutById(int id)
+        {
+            var template = this.data.Templates
+                .Where(t => t.Id == id)
+                .Select(t => new TemplateLayoutModel
+                {
+                    Id = id,
+                    Name = t.Name,
+                    Description = t.Description,
+                    Category = t.Category,
+                    Price = t.Price
+                })
+                .FirstOrDefault();
+
+            return template;
+        }
+
+        public TemplateListingViewModel GetTemplateListingById(int id)
+        {
+            var template = this.data.Templates
+                .Where(t => t.Id == id)
+                .Select(t => new TemplateListingViewModel
+                {
+                    Name = t.Name,
+                    Price = t.Price,
+                    ImageUrl = t.ImageUrl,
+                    Description = t.Description,
+                    Category = t.Category,
+                    Id = id
+                })
+                .FirstOrDefault();
+
+            return template;
+        }
     }
 }
