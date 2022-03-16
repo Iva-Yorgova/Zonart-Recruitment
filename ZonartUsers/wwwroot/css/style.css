@@ -54,6 +54,13 @@ body {
     width: 100px;
 }
 
+.recruit-title h2.recruitzone-subtitle {
+    letter-spacing: 1px;
+    line-height: 30px;
+    font-size: 18px;
+    margin-bottom: 50px;
+}
+
 .page-hero {
     background: #007bff; /* fallback colour. Make sure this is just one solid colour. */
     background: linear-gradient(rgba(0, 73, 247, 0.8), rgba(0, 112, 255, 0.97)), url(/Images/recruitment-bg.jpg); /* The least supported option. */
