@@ -108,7 +108,10 @@
 
                 <a asp-area="" asp-controller="Gallery" asp-action="All" id="gallery">Gallery</a>
 
-                <a asp-area="" asp-controller="RecruitZone" asp-action="Index" id="recruit">RecruitZone</a>
+                @if (SignInManager.IsSignedIn(User))
+                { 
+                    <a asp-area="" asp-controller="RecruitZone" asp-action="Index" id="recruit">RecruitZone</a>
+                }
 
                 <a asp-area="" asp-controller="Contact" asp-action="Add" id="contact">Contact</a>
 
@@ -123,11 +126,11 @@
             <a class="admin nav-right" asp-area="" asp-controller="Users" asp-action="WelcomeAdmin" id="admin" title="Admin" data-toggle="tooltip" data-placement="bottom" data-container="body">
                 <img class="admin" alt="Admin" />
             </a> }
-                    if (!userIsAdmin) { 
+        if (!userIsAdmin)
+        {
             <a class="admin nav-right" asp-area="" asp-controller="Users" asp-action="Welcome" id="admin" title="User" data-toggle="tooltip" data-placement="bottom" data-container="body">
                 <img class="admin" alt="Admin" />
-            </a>
-                    }
+            </a> }
 
             <a class="user-logout nav-right" asp-area="" asp-controller="Users" asp-action="Logout" id="logout" title="Logout" data-toggle="tooltip" data-placement="bottom" data-container="body">
                 <img class="logout-user" alt="Logout" />
